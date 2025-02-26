@@ -1,0 +1,68 @@
+---
+title: "UI"
+author: "Andi Illa Erviani Nensi"
+date: "2025-02-26"
+output: html_document
+runtime: shiny
+---
+
+
+```{r}
+library(shiny)
+library(shinydashboard)
+library(DT)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Manajemen Database"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Cabang", tabName = "cabang", icon = icon("building")),
+      menuItem("Invoice", tabName = "invoice", icon = icon("file-invoice")),
+      menuItem("Pelanggan", tabName = "pelanggan", icon = icon("users")),
+      menuItem("Produk", tabName = "produk", icon = icon("box")),
+      menuItem("Stock", tabName = "stock", icon = icon("database"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "cabang",
+              fluidPage(
+                h2("Data Cabang"),
+                DTOutput("table_cabang")
+              )),
+      tabItem(tabName = "invoice",
+              fluidPage(
+                h2("Data Invoice"),
+                DTOutput("table_invoice")
+              )),
+      tabItem(tabName = "pelanggan",
+              fluidPage(
+                h2("Data Pelanggan"),
+                DTOutput("table_pelanggan")
+              )),
+      tabItem(tabName = "produk",
+              fluidPage(
+                h2("Data Produk"),
+                DTOutput("table_produk")
+              )),
+      tabItem(tabName = "stock",
+              fluidPage(
+                h2("Data Stock"),
+                DTOutput("table_stock")
+              ))
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$table_cabang <- renderDT({ datatable(data.frame(ID_Cabang = integer(), Kota = character(), Jumlah_Stock = integer())) })
+  output$table_invoice <- renderDT({ datatable(data.frame(ID_Invoice = integer(), ID_Produk = integer(), ID_Cabang = integer(), ID_Pelanggan = integer(), Total = numeric(), Tanggal = as.Date(character()), Waktu = character(), Pembayaran = character(), Penilaian = integer())) })
+  output$table_pelanggan <- renderDT({ datatable(data.frame(ID_Pelanggan = integer(), Tipe_Pelanggan = character(), Jenis_Kelamin = character())) })
+  output$table_produk <- renderDT({ datatable(data.frame(ID_Produk = integer(), Kategori_Produk = character(), Harga_Satuan = numeric(), Kuantitas = integer(), Total_Harga = numeric(), ID_Cabang = integer())) })
+  output$table_stock <- renderDT({ datatable(data.frame(ID_Stok = integer(), ID_Produk = integer(), ID_Cabang = integer(), Jumlah_Stock = integer(), Tanggal_Update = as.Date(character()))) })
+}
+
+shinyApp(ui, server)
+```
+
+
