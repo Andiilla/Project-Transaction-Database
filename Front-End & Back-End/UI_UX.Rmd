@@ -335,7 +335,8 @@ ui <- dashboardPage(
                          box(
                            title = "Technical Writers", width = 12, status = "info", solidHeader = TRUE,
                            div(style = "text-align:center;", 
-                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               img(src = "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End/Meavi.jpg", 
+    height = "120px", width = "120px", style = "border-radius: 0;")
                                h4("Meavi Cintani"),
                                p("M0501241035")
                            )

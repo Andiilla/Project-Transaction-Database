@@ -1,0 +1,229 @@
+---
+title: "Untitled"
+author: "Rizka Annisa Mingka | M0501241041"
+date: "2025-02-26"
+output: html_document
+---
+
+```{r}
+library(shiny)
+library(graphics)
+library(shinydashboard)
+library(DT)
+library(DBI)
+library(RMySQL)
+```
+
+
+```{r}
+#Koneksi ke Database MySQL
+con <- dbConnect(RMySQL::MySQL(),
+                dbname = "manajemen_db",
+                host = "localhost",
+                port = 3306,
+                user = "root",
+                password = "password_anda")  # Ganti dengan password MySQL Anda
+
+
+server <- function(input, output) {
+  
+  # Ambil data jumlah cabang
+  output$total_cabang <- renderValueBox({
+    total_cabang <- dbGetQuery(con, "SELECT COUNT(DISTINCT ID_Cabang) AS total FROM cabang")
+    valueBox(total_cabang$total, "Total Cabang", icon = icon("building"))
+  })
+  
+  # Ambil data jumlah produk
+  output$total_produk <- renderValueBox({
+    total_produk <- dbGetQuery(con, "SELECT COUNT(*) AS total FROM produk")
+    valueBox(total_produk$total, "Total Produk", icon = icon("box-open"))
+  })
+  
+  # Ambil data jumlah pelanggan
+  output$total_pelanggan <- renderValueBox({
+    total_pelanggan <- dbGetQuery(con, "SELECT COUNT(*) AS total FROM pelanggan")
+    valueBox(total_pelanggan$total, "Total Pelanggan", icon = icon("user-friends"))
+  })
+
+  # Ambil data produk
+  output$table_produk <- renderDT({
+    data_produk <- dbGetQuery(con, "SELECT * FROM produk")
+    datatable(data_produk, options = list(pageLength = 10, scrollX = TRUE))
+  })
+
+  # Ambil data stok produk
+  output$table_stock <- renderDT({
+    data_stock <- dbGetQuery(con, "SELECT * FROM stok_produk")
+    datatable(data_stock, options = list(pageLength = 10, scrollX = TRUE))
+  })
+
+  # Ambil data pelanggan
+  output$table_pelanggan <- renderDT({
+    data_pelanggan <- dbGetQuery(con, "SELECT * FROM pelanggan")
+    datatable(data_pelanggan, options = list(pageLength = 10, scrollX = TRUE))
+  })
+
+  # Ambil data transaksi & invoice
+  output$table_invoice <- renderDT({
+    data_invoice <- dbGetQuery(con, "SELECT * FROM transaksi")
+    datatable(data_invoice, options = list(pageLength = 10, scrollX = TRUE))
+  })
+}
+
+shinyApp(ui, server)
+```
+
+
+
+
+
+```{r}
+ui <- dashboardPage(
+  dashboardHeader(title = "Business Transaction Management"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Beranda", tabName = "home", icon = icon("home")),
+      menuItem("Manajemen Produk", tabName = "produk", icon = icon("box")),
+      menuItem("Manajemen Stok", tabName = "stok", icon = icon("warehouse")),
+      menuItem("Manajemen Pelanggan", tabName = "pelanggan", icon = icon("users")),
+      menuItem("Transaksi & Invoice", tabName = "transaksi", icon = icon("file-invoice-dollar")),
+      menuItem("Laporan & Statistik", tabName = "statistik", icon = icon("chart-line")),
+      menuItem("Tim Kami", tabName = "team", icon = icon("users-cog"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "home", 
+              fluidPage(
+                h2("Selamat Datang di Sistem Manajemen Transaksi"),
+                fluidRow(
+                  valueBoxOutput("total_cabang"),
+                  valueBoxOutput("total_produk"),
+                  valueBoxOutput("total_pelanggan")
+                )
+              )
+      ),
+      tabItem(tabName = "produk", 
+              fluidPage(
+                h2("Manajemen Produk"),
+                DTOutput("table_produk")
+              )
+      ),
+      tabItem(tabName = "stok", 
+              fluidPage(
+                h2("Manajemen Stok"),
+                DTOutput("table_stock")
+              )
+      ),
+      tabItem(tabName = "pelanggan", 
+              fluidPage(
+                h2("Manajemen Pelanggan"),
+                DTOutput("table_pelanggan")
+              )
+      ),
+      tabItem(tabName = "transaksi", 
+              fluidPage(
+                h2("Transaksi & Invoice"),
+                DTOutput("table_invoice")
+              )
+      ),
+      tabItem(tabName = "statistik", 
+              fluidPage(
+                h2("Laporan & Statistik"),
+                p("Grafik dan laporan statistik akan ditampilkan di sini.")
+              )
+      ),
+      tabItem(tabName = "team", 
+              fluidPage(
+                h2("Tim Kami"),
+                fluidRow(
+                  column(4, 
+                         box(
+                           title = "Frontend Developer", width = 12, status = "primary", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Andi Illa Erviani Nensi"),
+                               p("M0501241035")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "Backend Developer", width = 12, status = "success", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Rizka Annisa Mingka"),
+                               p("M0501241035")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "Design Manager", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Wildatul Maulidiyah"),
+                               p("M0501241035")
+                           )
+                         )
+                  )
+                ),
+                fluidRow(
+                  column(4, 
+                         box(
+                           title = "DB Manager", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Hazelita Dwi Rahmasari"),
+                               p("M0501241035")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "Technical Writer", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Meavi Cintani"),
+                               p("M0501241035")
+                           )
+                         )
+                  )
+                )
+              )
+      )
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$total_cabang <- renderValueBox({
+    valueBox("3", "Total Cabang", icon = icon("building"))
+  })
+  output$total_produk <- renderValueBox({
+    valueBox("500+", "Total Produk", icon = icon("box-open"))
+  })
+  output$total_pelanggan <- renderValueBox({
+    valueBox("1000+", "Total Pelanggan", icon = icon("user-friends"))
+  })
+
+  # Placeholder untuk tabel di setiap tab
+  output$table_produk <- renderDT({
+    datatable(data.frame(ID_Produk = integer(), Kategori_Produk = character(), Harga_Satuan = numeric(), Kuantitas = integer(), Total_Harga = numeric(), ID_Cabang = integer()))
+  })
+  
+  output$table_stock <- renderDT({
+    datatable(data.frame(ID_Produk = integer(), ID_Cabang = integer(), Jumlah_Stock = integer(), Tanggal_Update = as.Date(character())))
+  })
+  
+  output$table_pelanggan <- renderDT({
+    datatable(data.frame(ID_Pelanggan = integer(), ID_Cabang = integer(), Tipe_Pelanggan = character(), Jenis_Kelamin = character()))
+  })
+  
+  output$table_invoice <- renderDT({
+    datatable(data.frame(ID_Invoice = integer(), ID_Produk = integer(), ID_Cabang = integer(), ID_Pelanggan = integer(), Total = numeric(), Tanggal = as.Date(character()), Waktu = character(), Pembayaran = character()))
+  })
+}
+
+shinyApp(ui, server)
+```
