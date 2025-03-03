@@ -7,31 +7,22 @@ output: html_document
 
 ```{r setup, include=FALSE}
 library(DBI)
-<<<<<<< Updated upstream
 library(RMySQL)
 library(dplyr)
 library(readr)
-=======
-<<<<<<< HEAD:DManager/project UTS.Rmd
 ```
 
 
 ```{r cars}
 ## Warning: package 'RMySQL' was built under R version 4.3.3
-=======
 library(RMySQL)
 library(dplyr)
 library(readr)
->>>>>>> e416080c9565b2e02d54ce2026337e46c1f532a4:DBManager/project UTS.Rmd
->>>>>>> Stashed changes
 library(glue)
 ```
 
 
 ```{r pressure, echo=FALSE}
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD:DManager/project UTS.Rmd
 ## Warning: package 'DBI' was built under R version 4.3.3
 library(RMySQL)
 ```
@@ -47,9 +38,6 @@ library(readr)
 ```
 
 ```{r pressure, echo=FALSE}
-=======
->>>>>>> e416080c9565b2e02d54ce2026337e46c1f532a4:DBManager/project UTS.Rmd
->>>>>>> Stashed changes
 # 1. Konfigurasi Database
 db_config <- list(
   host = "127.0.0.1",
@@ -111,9 +99,6 @@ con_db <- dbConnect(
 table_definitions <- list(
   cabang = "
     CREATE TABLE IF NOT EXISTS cabang (
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD:DManager/project UTS.Rmd
         ID_Cabang VARCHAR(100) PRIMARY KEY,
         ID_Produk INT,
         kota VARCHAR(100),
@@ -133,10 +118,7 @@ table_definitions <- list(
             ON DELETE CASCADE
             ON UPDATE CASCADE
     ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-  ",
-=======
->>>>>>> Stashed changes
-          ID_Cabang VARCHAR(100) PRIMARY KEY,
+  ", ID_Cabang VARCHAR(100) PRIMARY KEY,
           ID_Produk INT,
           kota VARCHAR(100),
           jumlah_stock INT
