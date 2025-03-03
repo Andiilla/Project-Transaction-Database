@@ -1,0 +1,625 @@
+---
+title: "UI"
+author: "Andi Illa Erviani Nensi"
+date: "2025-02-26"
+output: html_document
+runtime: shiny
+---
+
+
+```{r}
+library(shiny)
+library(shinydashboard)
+library(DT)
+
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Manajemen Database"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Cabang", tabName = "cabang", icon = icon("building")),
+      menuItem("Invoice", tabName = "invoice", icon = icon("file-invoice")),
+      menuItem("Pelanggan", tabName = "pelanggan", icon = icon("users")),
+      menuItem("Produk", tabName = "produk", icon = icon("box")),
+      menuItem("Stock", tabName = "stock", icon = icon("database"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "cabang",
+              fluidPage(
+                h2("Data Cabang"),
+                DTOutput("table_cabang")
+              )),
+      tabItem(tabName = "invoice",
+              fluidPage(
+                h2("Data Invoice"),
+                DTOutput("table_invoice")
+              )),
+      tabItem(tabName = "pelanggan",
+              fluidPage(
+                h2("Data Pelanggan"),
+                DTOutput("table_pelanggan")
+              )),
+      tabItem(tabName = "produk",
+              fluidPage(
+                h2("Data Produk"),
+                DTOutput("table_produk")
+              )),
+      tabItem(tabName = "stock",
+              fluidPage(
+                h2("Data Stock"),
+                DTOutput("table_stock")
+              ))
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$table_cabang <- renderDT({ datatable(data.frame(ID_Cabang = integer(), Kota = character(), Jumlah_Stock = integer())) })
+  output$table_invoice <- renderDT({ datatable(data.frame(ID_Invoice = integer(), ID_Produk = integer(), ID_Cabang = integer(), ID_Pelanggan = integer(), Total = numeric(), Tanggal = as.Date(character()), Waktu = character(), Pembayaran = character(), Penilaian = integer())) })
+  output$table_pelanggan <- renderDT({ datatable(data.frame(ID_Pelanggan = integer(), Tipe_Pelanggan = character(), Jenis_Kelamin = character())) })
+  output$table_produk <- renderDT({ datatable(data.frame(ID_Produk = integer(), Kategori_Produk = character(), Harga_Satuan = numeric(), Kuantitas = integer(), Total_Harga = numeric(), ID_Cabang = integer())) })
+  output$table_stock <- renderDT({ datatable(data.frame(ID_Stok = integer(), ID_Produk = integer(), ID_Cabang = integer(), Jumlah_Stock = integer(), Tanggal_Update = as.Date(character()))) })
+}
+
+shinyApp(ui, server)
+```
+
+
+```{r}
+ui <- dashboardPage(
+  dashboardHeader(title = "Business Transaction Management"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Beranda", tabName = "home", icon = icon("home")),
+      menuItem("Manajemen Produk", tabName = "produk", icon = icon("box")),
+      menuItem("Manajemen Stok", tabName = "stok", icon = icon("warehouse")),
+      menuItem("Manajemen Pelanggan", tabName = "pelanggan", icon = icon("users")),
+      menuItem("Transaksi & Invoice", tabName = "transaksi", icon = icon("file-invoice-dollar")),
+      menuItem("Laporan & Statistik", tabName = "statistik", icon = icon("chart-line")),
+      menuItem("Tim Kami", tabName = "team", icon = icon("users-cog"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "home", 
+              h2("Selamat Datang di Sistem Manajemen Transaksi"),
+              valueBox("3", "Total Cabang", icon = icon("building")),
+              valueBox("500+", "Total Produk", icon = icon("box-open")),
+              valueBox("1000+", "Total Pelanggan", icon = icon("user-friends"))
+      ),
+      tabItem(tabName = "produk", h2("Manajemen Produk")),
+      tabItem(tabName = "stok", h2("Manajemen Stok")),
+      tabItem(tabName = "pelanggan", h2("Manajemen Pelanggan")),
+      tabItem(tabName = "transaksi", h2("Transaksi & Invoice")),
+      tabItem(tabName = "statistik", h2("Laporan & Statistik")),
+      tabItem(tabName = "team", h2("Tim Kami"))
+    )
+  )
+)
+
+server <- function(input, output) {}
+
+shinyApp(ui, server)
+```
+
+
+```{r}
+library(shiny)
+library(shinydashboard)
+library(DT)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Business Transaction Management"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Beranda", tabName = "home", icon = icon("home")),
+      menuItem("Manajemen Produk", tabName = "produk", icon = icon("box")),
+      menuItem("Manajemen Stok", tabName = "stok", icon = icon("warehouse")),
+      menuItem("Manajemen Pelanggan", tabName = "pelanggan", icon = icon("users")),
+      menuItem("Transaksi & Invoice", tabName = "transaksi", icon = icon("file-invoice-dollar")),
+      menuItem("Laporan & Statistik", tabName = "statistik", icon = icon("chart-line")),
+      menuItem("Tim Kami", tabName = "team", icon = icon("users-cog"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      # Beranda
+      tabItem(tabName = "home", 
+              h2("Selamat Datang di Sistem Manajemen Transaksi"),
+              fluidRow(
+                valueBox("3", "Total Cabang", icon = icon("building"), color = "blue"),
+                valueBox("500+", "Total Produk", icon = icon("box-open"), color = "green"),
+                valueBox("1000+", "Total Pelanggan", icon = icon("user-friends"), color = "purple")
+              )
+      ),
+      
+      # Manajemen Produk
+      tabItem(tabName = "produk", 
+              h2("Manajemen Produk"),
+              DTOutput("table_produk")
+      ),
+      
+      # Manajemen Stok
+      tabItem(tabName = "stok", 
+              h2("Manajemen Stok"),
+              DTOutput("table_stok")
+      ),
+      
+      # Manajemen Pelanggan
+      tabItem(tabName = "pelanggan", 
+              h2("Manajemen Pelanggan"),
+              DTOutput("table_pelanggan")
+      ),
+      
+      # Transaksi & Invoice
+      tabItem(tabName = "transaksi", 
+              h2("Transaksi & Invoice"),
+              DTOutput("table_invoice")
+      ),
+      
+      # Laporan & Statistik
+      tabItem(tabName = "statistik", 
+              h2("Laporan & Statistik"),
+              p("Visualisasi laporan dan analisis data akan ditampilkan di sini.")
+      ),
+      
+      # Tim Kami
+      tabItem(tabName = "team", 
+              h2("Tim Kami"),
+              p("Informasi tentang tim pengembang dan administrator sistem.")
+      )
+    )
+  )
+)
+
+server <- function(input, output) {
+  # Data dummy sesuai ERD
+  output$table_produk <- renderDT({
+    datatable(data.frame(
+      ID_Produk = 1:5,
+      Kategori_Produk = c("Elektronik", "Pakaian", "Makanan", "Perabotan", "Kosmetik"),
+      Harga_Satuan = c(500000, 200000, 50000, 1000000, 150000),
+      Kuantitas = c(100, 50, 200, 30, 80),
+      Total_Harga = c(50000000, 10000000, 10000000, 30000000, 12000000),
+      ID_Cabang = c(1, 2, 1, 3, 2)
+    ))
+  })
+  
+  output$table_stok <- renderDT({
+    datatable(data.frame(
+      ID_Stok = 1:5,
+      ID_Produk = c(1, 2, 3, 4, 5),
+      ID_Cabang = c(1, 2, 1, 3, 2),
+      Jumlah_Stock = c(100, 50, 200, 30, 80),
+      Tanggal_Update = as.Date(Sys.Date() - c(10, 20, 30, 40, 50))
+    ))
+  })
+  
+  output$table_pelanggan <- renderDT({
+    datatable(data.frame(
+      ID_Pelanggan = 1:5,
+      Tipe_Pelanggan = c("Individu", "Bisnis", "Individu", "Individu", "Bisnis"),
+      Jenis_Kelamin = c("Laki-laki", "Perempuan", "Laki-laki", "Perempuan", "Laki-laki")
+    ))
+  })
+  
+  output$table_invoice <- renderDT({
+    datatable(data.frame(
+      ID_Invoice = 1:5,
+      ID_Produk = c(1, 2, 3, 4, 5),
+      ID_Cabang = c(1, 2, 1, 3, 2),
+      ID_Pelanggan = c(3, 2, 1, 5, 4),
+      Total = c(500000, 200000, 50000, 1000000, 150000),
+      Tanggal = as.Date(Sys.Date() - c(1, 2, 3, 4, 5)),
+      Waktu = c("12:00", "14:30", "10:15", "16:45", "18:00"),
+      Pembayaran = c("Kartu Kredit", "Transfer Bank", "Tunai", "E-Wallet", "Tunai"),
+      Penilaian = c(5, 4, 5, 3, 4)
+    ))
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+```{r}
+library(shiny)
+library(shinydashboard)
+library(DT)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Business Transaction Management"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Beranda", tabName = "home", icon = icon("home")),
+      menuItem("Manajemen Produk", tabName = "produk", icon = icon("box")),
+      menuItem("Manajemen Stok", tabName = "stok", icon = icon("warehouse")),
+      menuItem("Manajemen Pelanggan", tabName = "pelanggan", icon = icon("users")),
+      menuItem("Transaksi & Invoice", tabName = "transaksi", icon = icon("file-invoice-dollar")),
+      menuItem("Laporan & Statistik", tabName = "statistik", icon = icon("chart-line")),
+      menuItem("Tim Kami", tabName = "team", icon = icon("users-cog"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "home", 
+              fluidPage(
+                h2("Selamat Datang di Sistem Manajemen Transaksi"),
+                fluidRow(
+                  valueBoxOutput("total_cabang"),
+                  valueBoxOutput("total_produk"),
+                  valueBoxOutput("total_pelanggan")
+                )
+              )
+      ),
+      tabItem(tabName = "produk", 
+              fluidPage(
+                h2("Manajemen Produk"),
+                DTOutput("table_produk")
+              )
+      ),
+      tabItem(tabName = "stok", 
+              fluidPage(
+                h2("Manajemen Stok"),
+                DTOutput("table_stock")
+              )
+      ),
+      tabItem(tabName = "pelanggan", 
+              fluidPage(
+                h2("Manajemen Pelanggan"),
+                DTOutput("table_pelanggan")
+              )
+      ),
+      tabItem(tabName = "transaksi", 
+              fluidPage(
+                h2("Transaksi & Invoice"),
+                DTOutput("table_invoice")
+              )
+      ),
+      tabItem(tabName = "statistik", 
+              fluidPage(
+                h2("Laporan & Statistik"),
+                p("Grafik dan laporan statistik akan ditampilkan di sini.")
+              )
+      ),
+      tabItem(tabName = "team", 
+              fluidPage(
+                h2("Tim Kami"),
+                fluidRow(
+                  column(4, 
+                         box( 
+                           title = div("Frontend Developers", class = "box-title"), width = 12, status = "primary", solidHeader = TRUE, 
+                           div(style = "text-align:center;", 
+                               img(src = "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End/Andiilla.png", 
+                                   height = "130px", width = "130px", class = "img-circle"),
+                               h4("Andi Illa Erviani Nensi"),
+                               p("M0501241035")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "Backend Developers", width = 12, status = "success", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Rizka Annisa Mingka"),
+                               p("M0501241035")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "Design Managers", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Wildatul Maulidiyah"),
+                               p("M0501241035")
+                           )
+                         )
+                  )
+                ),
+                fluidRow(
+                  column(4, 
+                         box(
+                           title = "DB Managers", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Hazelita Dwi Rahmasari"),
+                               p("M0501241035")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "Technical Writers", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End/Meavi.jpg", 
+    height = "120px", width = "120px", style = "border-radius: 0;")
+                               h4("Meavi Cintani"),
+                               p("M0501241035")
+                           )
+                         )
+                  )
+                )
+              )
+      )
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$total_cabang <- renderValueBox({
+    valueBox("3", "Total Cabang", icon = icon("building"))
+  })
+  output$total_produk <- renderValueBox({
+    valueBox("500+", "Total Produk", icon = icon("box-open"))
+  })
+  output$total_pelanggan <- renderValueBox({
+    valueBox("1000+", "Total Pelanggan", icon = icon("user-friends"))
+  })
+
+  # Placeholder untuk tabel di setiap tab
+  output$table_produk <- renderDT({
+    datatable(data.frame(ID_Produk = integer(), Kategori_Produk = character(), Harga_Satuan = numeric(), Kuantitas = integer(), Total_Harga = numeric(), ID_Cabang = integer()))
+  })
+  
+  output$table_stock <- renderDT({
+    datatable(data.frame(ID_Produk = integer(), ID_Cabang = integer(), Jumlah_Stock = integer(), Tanggal_Update = as.Date(character())))
+  })
+  
+  output$table_pelanggan <- renderDT({
+    datatable(data.frame(ID_Pelanggan = integer(), ID_Cabang = integer(), Tipe_Pelanggan = character(), Jenis_Kelamin = character()))
+  })
+  
+  output$table_invoice <- renderDT({
+    datatable(data.frame(ID_Invoice = integer(), ID_Produk = integer(), ID_Cabang = integer(), ID_Pelanggan = integer(), Total = numeric(), Tanggal = as.Date(character()), Waktu = character(), Pembayaran = character()))
+  })
+}
+
+shinyApp(ui, server)
+
+
+```
+
+```{r}
+library(shiny)
+library(shinydashboard)
+library(DT)
+library(DBI)
+library(RMySQL)  # Jika menggunakan MySQL
+library(ggplot2)
+
+
+# Koneksi ke database
+con <- dbConnect(
+  RMySQL::MySQL(),  # Ganti dengan RPostgreSQL::PostgreSQL() jika menggunakan PostgreSQL
+  dbname = "projecttransactiondatabase",
+  host = "127.0.0.1",
+  user = "root",
+  password = "",
+  port = 3306 # Sesuaikan dengan port database Anda
+)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Business Transaction Management"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Beranda", tabName = "home", icon = icon("home")),
+      menuItem("Manajemen Produk", tabName = "produk", icon = icon("box")),
+      menuItem("Manajemen Stok", tabName = "stok", icon = icon("warehouse")),
+      menuItem("Manajemen Pelanggan", tabName = "pelanggan", icon = icon("users")),
+      menuItem("Transaksi & Invoice", tabName = "transaksi", icon = icon("file-invoice-dollar")),
+      menuItem("Laporan & Statistik", tabName = "statistik", icon = icon("chart-line")),
+      menuItem("Tim Kami", tabName = "team", icon = icon("users-cog"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "home", 
+              fluidPage(
+                h2("Selamat Datang di Sistem Manajemen Transaksi"),
+                fluidRow(
+                  valueBoxOutput("total_cabang"),
+                  valueBoxOutput("total_produk"),
+                  valueBoxOutput("total_pelanggan")
+                )
+              )
+      ),
+      tabItem(tabName = "produk", 
+              fluidPage(
+                h2("Manajemen Produk"),
+                DTOutput("table_produk")
+              )
+      ),
+      tabItem(tabName = "stok", 
+              fluidPage(
+                h2("Manajemen Stok"),
+                DTOutput("table_stock")
+              )
+      ),
+      tabItem(tabName = "pelanggan", 
+              fluidPage(
+                h2("Manajemen Pelanggan"),
+                DTOutput("table_pelanggan")
+              )
+      ),
+      tabItem(tabName = "transaksi", 
+              fluidPage(
+                h2("Transaksi & Invoice"),
+                DTOutput("table_invoice")
+              )
+      ),
+      tabItem(tabName = "statistik", 
+              fluidPage(
+                h2("Laporan & Statistik"),
+                p("Berikut adalah Grafik dan Laporan Statistik Business Transaction."),
+                fluidRow(
+                  column(6, plotOutput("transaksi_cabang_plot")),
+                  column(6, plotOutput("harga_kategori_plot"))
+                ),
+                h3("Rekap Jumlah Transaksi & Pendapatan per Cabang"),
+                DTOutput("rekap_transaksi")
+              )
+      ),
+      tabItem(tabName = "team", 
+              fluidPage(
+                h2("Tim Kami"),
+                fluidRow(
+                  column(4, 
+                         box( 
+                           title = div("Frontend Developers", class = "box-title"), width = 12, status = "primary", solidHeader = TRUE, 
+                           div(style = "text-align:center;", 
+                               img(src = "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End/Andiilla.png", 
+                                   height = "130px", width = "130px", class = "img-circle"),
+                               h4("Andi Illa Erviani Nensi"),
+                               p("M0501241035")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "DB Managers", width = 12, status = "success", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Hazelita Dwi Rahmasari"),
+                               p("M0501241067")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "Design Managers", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Wildatul Maulidiyah"),
+                               p("M0501241091")
+                           )
+                         )
+                  )
+                ),
+                fluidRow(
+                  column(4, 
+                         box(
+                           title = "Backend Developers", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Rizka Annisa Mingka"),
+                               p("M0501241041")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "Technical Writers", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Meavi Cintani"),
+                               p("M0501241040")
+                           )
+                         )
+                  )
+                )
+              )
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  # Ambil data dari database untuk Manajemen Produk
+  output$table_produk <- renderDT({
+    query <- "SELECT p.ID_Produk, p.Kategori_Produk, p.Harga_Satuan, p.Kuantitas, 
+                     p.Total_Harga, p.ID_Cabang, c.Kota 
+              FROM produk p
+              JOIN cabang c ON p.ID_Cabang = c.ID_Cabang"
+    data_produk <- dbGetQuery(con, query)
+    datatable(data_produk)
+  })
+  
+  # Placeholder untuk tabel lainnya
+  output$table_stock <- renderDT({
+    query <- "SELECT ID_Produk, ID_Cabang, Jumlah_Stock, Tanggal_Update FROM stock"
+    data_stock <- dbGetQuery(con, query)
+    datatable(data_stock)
+  })
+  
+  output$table_pelanggan <- renderDT({
+    query <- "SELECT ID_Pelanggan, Tipe_Pelanggan, Jenis_Kelamin FROM pelanggan"
+    data_pelanggan <- dbGetQuery(con, query)
+    datatable(data_pelanggan)
+  })
+  
+  output$table_invoice <- renderDT({
+    query <- "SELECT ID_Invoice, ID_Produk, ID_Cabang, ID_Pelanggan, Total, Tanggal, Waktu, Pembayaran FROM invoice"
+    data_invoice <- dbGetQuery(con, query)
+    datatable(data_invoice)
+  })
+
+  # Value boxes
+  output$total_cabang <- renderValueBox({
+    query <- "SELECT COUNT(DISTINCT ID_Cabang) AS total FROM cabang"
+    total_cabang <- dbGetQuery(con, query)$total
+    valueBox(total_cabang, "Total Cabang", icon = icon("building"))
+  })
+  
+  output$total_produk <- renderValueBox({
+    query <- "SELECT COUNT(ID_Produk) AS total FROM produk"
+    total_produk <- dbGetQuery(con, query)$total
+    valueBox(total_produk, "Total Produk", icon = icon("box-open"))
+  })
+  
+  output$total_pelanggan <- renderValueBox({
+    query <- "SELECT COUNT(ID_Pelanggan) AS total FROM pelanggan"
+    total_pelanggan <- dbGetQuery(con, query)$total
+    valueBox(total_pelanggan, "Total Pelanggan", icon = icon("user-friends"))
+  })
+  
+  # Statistik Jumlah Transaksi per Kota
+  output$transaksi_cabang_plot <- renderPlot({
+    query <- "SELECT c.Kota, COUNT(i.ID_Invoice) AS Jumlah_Transaksi
+              FROM invoice i
+              JOIN cabang c ON i.ID_Cabang = c.ID_Cabang
+              GROUP BY c.Kota"
+    transaksi_summary <- dbGetQuery(con, query)
+    
+    ggplot(transaksi_summary, aes(x = Kota, y = Jumlah_Transaksi, fill = Kota)) +
+      geom_bar(stat = "identity") +
+      labs(title = "Jumlah Transaksi per Kota", x = "Kota", y = "Jumlah Transaksi") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  })
+
+  # Statistik Pendapatan per Kota
+  output$harga_kategori_plot <- renderPlot({
+    query <- "SELECT c.Kota, SUM(i.Total) AS Total_Pendapatan
+              FROM invoice i
+              JOIN cabang c ON i.ID_Cabang = c.ID_Cabang
+              GROUP BY c.Kota"
+    pendapatan_summary <- dbGetQuery(con, query)
+    
+    ggplot(pendapatan_summary, aes(x = Kota, y = Total_Pendapatan, fill = Kota)) +
+      geom_bar(stat = "identity") +
+      labs(title = "Total Pendapatan per Kota", x = "Kota", y = "Total Pendapatan (Rp)") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  })
+
+  # Tabel Rekap Jumlah Transaksi dan Pendapatan per Kota
+  output$rekap_transaksi <- renderDT({
+    query <- "SELECT c.Kota, COUNT(i.ID_Invoice) AS Jumlah_Transaksi, SUM(i.Total) AS Total_Pendapatan
+              FROM invoice i
+              JOIN cabang c ON i.ID_Cabang = c.ID_Cabang
+              GROUP BY c.Kota"
+    rekap <- dbGetQuery(con, query)
+    
+    datatable(rekap, options = list(pageLength = 10))
+  })
+
+}
+
+shinyApp(ui, server)
+
+```
+
