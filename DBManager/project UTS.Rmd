@@ -7,14 +7,49 @@ output: html_document
 
 ```{r setup, include=FALSE}
 library(DBI)
+<<<<<<< Updated upstream
 library(RMySQL)
 library(dplyr)
 library(readr)
+=======
+<<<<<<< HEAD:DManager/project UTS.Rmd
+```
+
+
+```{r cars}
+## Warning: package 'RMySQL' was built under R version 4.3.3
+=======
+library(RMySQL)
+library(dplyr)
+library(readr)
+>>>>>>> e416080c9565b2e02d54ce2026337e46c1f532a4:DBManager/project UTS.Rmd
+>>>>>>> Stashed changes
 library(glue)
 ```
 
 
 ```{r pressure, echo=FALSE}
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD:DManager/project UTS.Rmd
+## Warning: package 'DBI' was built under R version 4.3.3
+library(RMySQL)
+```
+
+```{r pressure, echo=FALSE}
+## Warning: package 'DBI' was built under R version 4.3.3
+library(dplyr)
+```
+
+```{r pressure, echo=FALSE}
+## Warning: package 'DBI' was built under R version 4.3.3
+library(readr)
+```
+
+```{r pressure, echo=FALSE}
+=======
+>>>>>>> e416080c9565b2e02d54ce2026337e46c1f532a4:DBManager/project UTS.Rmd
+>>>>>>> Stashed changes
 # 1. Konfigurasi Database
 db_config <- list(
   host = "127.0.0.1",
@@ -76,6 +111,31 @@ con_db <- dbConnect(
 table_definitions <- list(
   cabang = "
     CREATE TABLE IF NOT EXISTS cabang (
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD:DManager/project UTS.Rmd
+        ID_Cabang VARCHAR(100) PRIMARY KEY,
+        ID_Produk INT,
+        kota VARCHAR(100),
+        jumlah_stock INT
+    ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+  ",
+  
+  produk = "
+    CREATE TABLE IF NOT EXISTS produk (
+        ID_Produk INT AUTO_INCREMENT PRIMARY KEY,
+        Kategori_Produk VARCHAR(100),
+        Harga_Satuan DECIMAL(10,2),
+        Kuantitas INT,
+        Total_Harga DECIMAL(15,2),
+        ID_Cabang VARCHAR(100),
+        FOREIGN KEY (ID_Cabang) REFERENCES cabang(ID_Cabang)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+    ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+  ",
+=======
+>>>>>>> Stashed changes
           ID_Cabang VARCHAR(100) PRIMARY KEY,
           ID_Produk INT,
           kota VARCHAR(100),
@@ -96,6 +156,10 @@ table_definitions <- list(
               ON UPDATE CASCADE
       ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
     ",
+<<<<<<< Updated upstream
+=======
+>>>>>>> e416080c9565b2e02d54ce2026337e46c1f532a4:DBManager/project UTS.Rmd
+>>>>>>> Stashed changes
   
   pelanggan = "
     CREATE TABLE IF NOT EXISTS pelanggan (
@@ -132,7 +196,15 @@ table_definitions <- list(
     CREATE TABLE IF NOT EXISTS stock (
         ID_Produk INT NOT NULL,
         ID_Cabang VARCHAR(100) NOT NULL,
+<<<<<<< Updated upstream
         Jumlah_Stock INT NOT NULL,
+=======
+<<<<<<< HEAD:DManager/project UTS.Rmd
+        Jumlah_Stok INT NOT NULL,
+=======
+        Jumlah_Stock INT NOT NULL,
+>>>>>>> e416080c9565b2e02d54ce2026337e46c1f532a4:DBManager/project UTS.Rmd
+>>>>>>> Stashed changes
         Tanggal_Update DATE NOT NULL,
         FOREIGN KEY (ID_Produk) REFERENCES produk(ID_Produk)
             ON DELETE CASCADE
@@ -146,10 +218,28 @@ table_definitions <- list(
 
 ```
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD:DManager/project UTS.Rmd
+```{r pressure, echo=FALSE}
+cabang <- read_csv("D://zkuliah2//SMT 2//Manajemen Data Statistika//Project-Transaction-Database//Data//data_cabang.csv")
+invoice <-read_csv ("D://zkuliah2//SMT 2//Manajemen Data Statistika//Project-Transaction-Database//Data//data_invoice.csv")
+pelanggan <-read_csv ("D://zkuliah2//SMT 2//Manajemen Data Statistika//Project-Transaction-Database//Data//data_pelanggan.csv")
+produk <-read_csv ("D://zkuliah2//SMT 2//Manajemen Data Statistika//Project-Transaction-Database//Data//data_produk.csv")
+stock <-read_csv ("D://zkuliah2//SMT 2//Manajemen Data Statistika//Project-Transaction-Database//Data//data_Stock.csv")
+```
+=======
+>>>>>>> e416080c9565b2e02d54ce2026337e46c1f532a4:DBManager/project UTS.Rmd
+>>>>>>> Stashed changes
 
 ```{r pressure, echo=FALSE}
 # 7. Eksekusi Pembuatan Tabel
 tryCatch({
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD:DManager/project UTS.Rmd
+=======
+>>>>>>> Stashed changes
    # Buka koneksi ke database spesifik
   con_db <- dbConnect(
     MySQL(),
@@ -161,6 +251,10 @@ tryCatch({
   )
   
   # Mulai transaksi
+<<<<<<< Updated upstream
+=======
+>>>>>>> e416080c9565b2e02d54ce2026337e46c1f532a4:DBManager/project UTS.Rmd
+>>>>>>> Stashed changes
   dbBegin(con_db)
   
   for (table_name in names(table_definitions)) {
@@ -184,6 +278,13 @@ tryCatch({
   message("\nKoneksi database ditutup")
 })
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD:DManager/project UTS.Rmd
+```
+
+=======
+>>>>>>> Stashed changes
 con_db <- dbConnect(
   MySQL(),
   host = db_config$host,
@@ -283,3 +384,7 @@ for (i in 1:nrow(stock)) {
 ```
 
 
+<<<<<<< Updated upstream
+=======
+>>>>>>> e416080c9565b2e02d54ce2026337e46c1f532a4:DBManager/project UTS.Rmd
+>>>>>>> Stashed changes
