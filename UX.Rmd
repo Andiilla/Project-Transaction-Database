@@ -1,12 +1,9 @@
 ---
-title: "UI"
-author: "Andi Illa Erviani Nensi"
+title: "Untitled"
+author: "Rizka Annisa Mingka | M0501241041"
 date: "2025-02-26"
 output: html_document
-runtime: shiny
 ---
-
-
 
 ```{r}
 library(shiny)
@@ -96,8 +93,8 @@ ui <- dashboardPage(
                          box( 
                            title = div("Frontend Developers", class = "box-title"), width = 12, status = "primary", solidHeader = TRUE, 
                            div(style = "text-align:center;", 
-                               img(src = "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/Andiilla.png", 
-                                   height = "120px", width = "120px", class = "img-circle"),
+                               img(src = "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End/Andiilla.png", 
+                                   height = "130px", width = "130px", class = "img-circle"),
                                h4("Andi Illa Erviani Nensi"),
                                p("M0501241035")
                            )
@@ -129,8 +126,7 @@ ui <- dashboardPage(
                          box(
                            title = "Backend Developers", width = 12, status = "info", solidHeader = TRUE,
                            div(style = "text-align:center;", 
-                               img(src = "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/Rizka.png", 
-                                   height = "120px", width = "120px", class = "img-circle"),
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
                                h4("Rizka Annisa Mingka"),
                                p("M0501241041")
                            )
@@ -140,8 +136,7 @@ ui <- dashboardPage(
                          box(
                            title = "Technical Writers", width = 12, status = "info", solidHeader = TRUE,
                            div(style = "text-align:center;", 
-                               img(src = "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/Meavi.png", 
-                                   height = "120px", width = "120px", class = "img-circle"),
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
                                h4("Meavi Cintani"),
                                p("M0501241040")
                            )
@@ -249,4 +244,3 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 
 ```
-
