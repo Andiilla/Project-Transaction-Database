@@ -47,7 +47,8 @@ Jika ada pertanyaan atau saran, feel free untuk membuka **issue** atau **pull re
 > **Struktur database yang digunakan.**  
 
 ## 📊 ERD  
-> **Diagram ERD dari database.**  
+> **Diagram ERD dari database.**
+> ![Entity Relationship Diagram](DataBase/Kelompok1_FIX_ERD1.jpg)
 
 ## 📂 Data Description  
 > **Penjelasan tentang struktur data.**  
