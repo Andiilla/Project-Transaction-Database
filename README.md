@@ -47,10 +47,41 @@ Jika ada pertanyaan atau saran, feel free untuk membuka **issue** atau **pull re
 > **Struktur database yang digunakan.**  
 
 ## 🏗 Entity Relationship Diagram (ERD)
+>Berikut adalah ERD untuk sistem ini:
+>![Entity Relationship Diagram](Kelompok%201_FIX_ERD1.jpg)
+>📌 Penjelasan Tabel dan Relasi
+Berikut adalah ERD dari sistem ini:
 
-Berikut adalah ERD untuk sistem ini:
+![ERD](./Kelompok%201_FIX_ERD1.jpg)
 
-![Entity Relationship Diagram](Kelompok%201_FIX_ERD1.jpg)
+📌 **Penjelasan Tabel dan Relasi**
+
+### **1. Produk (`ID_Produk` - Primary Key)**
+   - Menyimpan informasi tentang produk seperti kategori, harga satuan, kuantitas, total harga, dan cabang tempat produk tersedia.
+   - Memiliki relasi one-to-many dengan tabel **Stock**, **Invoice**, dan **Cabang**.
+
+### **2. Stock (`ID_Produk`, `ID_Cabang` - Foreign Key)**
+   - Menyimpan informasi jumlah stok produk di setiap cabang dan tanggal pembaruannya.
+   - Berelasi many-to-one dengan tabel **Produk** dan **Cabang**.
+
+### **3. Cabang (`ID_Cabang` - Primary Key)**
+   - Menyimpan informasi tentang lokasi cabang, kota, dan jumlah stok produk di setiap cabang.
+   - Berelasi dengan **Produk** dan **Stock**.
+
+### **4. Pelanggan (`ID_Pelanggan` - Primary Key)**
+   - Menyimpan data pelanggan seperti jenis kelamin dan tipe pelanggan.
+   - Berelasi one-to-many dengan tabel **Invoice**.
+
+### **5. Invoice (`ID_Invoice` - Primary Key)**
+   - Menyimpan transaksi pembelian produk oleh pelanggan, termasuk detail pembayaran dan penilaian.
+   - Berelasi many-to-one dengan tabel **Produk**, **Cabang**, dan **Pelanggan**.
+
+📊 **Hubungan Antar Tabel**
+- **Produk** memiliki banyak transaksi **Invoice**, sehingga `ID_Produk` menjadi Foreign Key di tabel **Invoice**.
+- **Cabang** memiliki banyak produk dan stok, sehingga `ID_Cabang` menjadi Foreign Key di **Produk**, **Stock**, dan **Invoice**.
+- **Pelanggan** bisa melakukan banyak transaksi, sehingga `ID_Pelanggan` menjadi Foreign Key di **Invoice**.
+
+
 
 
 ## 📂 Data Description  
