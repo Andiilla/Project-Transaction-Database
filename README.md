@@ -46,9 +46,12 @@ Jika ada pertanyaan atau saran, feel free untuk membuka **issue** atau **pull re
 ## 🗄 Database Scheme  
 > **Struktur database yang digunakan.**  
 
-## 📊 ERD  
-> **Diagram ERD dari database.**
-> ![Entity Relationship Diagram](DataBase/Kelompok1_FIX_ERD1.jpg)
+## 🏗 Entity Relationship Diagram (ERD)
+
+Berikut adalah ERD untuk sistem ini:
+
+![Entity Relationship Diagram](Kelompok%201_FIX_ERD1.jpg)
+
 
 ## 📂 Data Description  
 > **Penjelasan tentang struktur data.**  
