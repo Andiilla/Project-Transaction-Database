@@ -79,8 +79,7 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 
 # 🗄 Database Scheme  
 ## Berikut adalah database sceheme pada sistem ini : 
-(![Desain Database](https://raw.githubusercontent.com/AndiIlla/Project-Transaction-Database/blob/main/Desain%20DataBase/Kelompok%201__FIX_IR.jpg)
-)
+(![Desain Database](./Kelompok%201__FIX_IR.jpg)
 
 
 
