@@ -78,8 +78,9 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 > **List kebutuhan sistem & dependencies.**  
 
 # 🗄 Database Scheme  
-# Berikut adalah database sceheme pada sistem ini : 
-![Database Scheme](Desain%20DataBase/Kelompok%201_FIX_IR.jpg)
+## Berikut adalah database sceheme pada sistem ini : 
+![Desain Database](https://github.com/AndiIlla/Project-Transaction-Database/blob/main/Desain%20DataBase/Kelompok%201_FIX_IR.jpg)
+
 
 
 # 🏗 Entity Relationship Diagram (ERD)
