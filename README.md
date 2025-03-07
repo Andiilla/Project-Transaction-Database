@@ -54,19 +54,19 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 ![Beranda](Beranda.jpg)
 
 ### Manajemen Produk
-![Manajemen Produk](Manajemen Produk.jpg)
+![Manajemen Produk](Manajemen_Produk.jpg)
 
 ### Manajemen Stok
-![Manajemen Stok](Manajemen Stok.jpg)
+![Manajemen Stok](Manajemen_Stok.jpg)
 
 ### Manajemen Pelanggan
-![Manajemen Pelanggan](Manajemen Pelanggan.jpg)
+![Manajemen Pelanggan](Manajemen_Pelanggan.jpg)
 
 ### Transaksi dan Invoice
-![Transaksi dan Invoice](Transaksi dan Invoice.jpg)
+![Transaksi dan Invoice](Transaksi_dan_Invoice.jpg)
 
 ### Laporan Statistik
-![Laporan Statistik](Laporan Statistik.jpg)
+![Laporan Statistik](Laporan_Statistik.jpg)
 
  
 
