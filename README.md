@@ -1,7 +1,7 @@
 # 👋 Selamat Datang di Repositori Ini! 🚀  
 
 Halo! Terima kasih sudah mampir ke proyek ini.  
-Di sini, kamu akan menemukan **[Nama Proyek]**, sebuah solusi untuk [deskripsi singkat proyek].  
+Di sini, kamu akan menemukan **Project Transaction Database**, istem manajemen transaksi bisnis yang menyediakan fitur pelacakan produk, stok, pelanggan, serta transaksi & invoice. Dashboard dilengkapi dengan laporan dan statistik interaktif untuk menganalisis jumlah transaksi dan pendapatan per kota, memudahkan pengambilan keputusan bisnis secara real-time⏳📉✨  
 
 💡 **Apa yang bisa kamu temukan di sini?**  
 ✅ Dokumentasi lengkap  
@@ -29,10 +29,10 @@ Jika ada pertanyaan atau saran, feel free untuk membuka **issue** atau **pull re
 ---
 
 ## 📝 Information  
-> **Penjelasan umum tentang proyek ini.**  
+>
 
 ## 📖 About  
-> **Latar belakang dan tujuan proyek.**  
+> 💡 Proyek ini dikembangkan untuk membantu bisnis dalam mengelola transaksi mereka secara lebih efisien dan terdokumentasi dengan baik. Dengan adanya fitur pelacakan stok, manajemen pelanggan, serta laporan statistik, sistem ini diharapkan dapat meningkatkan efisiensi operasional dan memberikan wawasan bisnis yang lebih baik bagi penggunanya.  
 
 ## 🖼 Screenshot  
 > **Tampilkan beberapa screenshot proyek di sini.**  
@@ -48,8 +48,6 @@ Jika ada pertanyaan atau saran, feel free untuk membuka **issue** atau **pull re
 
 ## 🏗 Entity Relationship Diagram (ERD)
 >Berikut adalah ERD untuk sistem ini:
->![Entity Relationship Diagram](Kelompok%201_FIX_ERD1.jpg)
->📌 Penjelasan Tabel dan Relasi
 Berikut adalah ERD dari sistem ini:
 
 ![ERD](./Kelompok%201_FIX_ERD1.jpg)
