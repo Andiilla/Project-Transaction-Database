@@ -28,25 +28,36 @@ Jika ada pertanyaan atau saran, feel free untuk membuka **issue** atau **pull re
 
 ---
 
-## 📝 Information  
->
+# 📝 Information  
+## Transaction Project 
+Proyek ini merupakan implementasi sistem manajemen transaksi berbasis database yang dikembangkan untuk membantu bisnis dalam mencatat, memantau, dan menganalisis data transaksi secara terstruktur. Dengan fitur utama seperti pelacakan stok, manajemen pelanggan, serta laporan statistik interaktif, sistem ini mendukung pengambilan keputusan yang lebih cepat dan akurat.
 
-## 📖 About  
-💡 Proyek ini dikembangkan untuk membantu bisnis dalam mengelola transaksi mereka secara lebih efisien dan terdokumentasi dengan baik. Dengan adanya fitur pelacakan stok, manajemen pelanggan, serta laporan statistik, sistem ini diharapkan dapat meningkatkan efisiensi operasional dan memberikan wawasan bisnis yang lebih baik bagi penggunanya.  
+## Penggunaan
+Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi penjualan dengan memilih pelanggan serta produk yang dibeli. Sistem secara otomatis menghitung total pembayaran dan menyimpan transaksi ke dalam database. Pengguna juga dapat mengakses laporan statistik untuk menganalisis penjualan, melihat tren stok, serta mengelola data pelanggan dan pengguna sesuai dengan hak akses yang diberikan
 
-## 🖼 Screenshot  
+## Teknologi yang digunakan
+1. Database Manager: MySQL
+2. Design Manager :
+3. Backend: Python Flask / Node.js Express
+4. Frontend: React / Vue.js
+
+# 📖 About  
+💡 Proyek ini dikembangkan untuk membantu bisnis dalam mengelola transaksi mereka secara lebih efisien dan terdokumentasi dengan baik. Dengan adanya fitur pelacakan stok, manajemen pelanggan, serta laporan statistik, sistem ini diharapkan dapat meningkatkan efisiensi operasional dan memberikan wawasan bisnis yang lebih baik bagi penggunanya. 
+📚 Proyek ini dibuat sebagai tugas Proyek Praktikum Manajemen Data Statistika tahun 2025, dalam mata kuliah pilihan pascasarjana Statistik dan Sains Data, IPB University.
+
+# 🖼 Screenshot  
 > **Tampilkan beberapa screenshot proyek di sini.**  
 
-## 🎥 Demo  
+# 🎥 Demo  
 > **Tambahkan link demo jika ada.**  
 
-## ⚙️ Requirements  
+# ⚙️ Requirements  
 > **List kebutuhan sistem & dependencies.**  
 
-## 🗄 Database Scheme  
+# 🗄 Database Scheme  
 > **Struktur database yang digunakan.**  
 
-## 🏗 Entity Relationship Diagram (ERD)
+# 🏗 Entity Relationship Diagram (ERD)
 >Berikut adalah ERD untuk sistem ini:
 Berikut adalah ERD dari sistem ini:
 
@@ -80,13 +91,17 @@ Berikut adalah ERD dari sistem ini:
 - **Pelanggan** bisa melakukan banyak transaksi, sehingga `ID_Pelanggan` menjadi Foreign Key di **Invoice**.
 
 
+# 📂 Data Description  
+## Berikut adalah tabel-tabel utama dalam database ini:
 
-
-## 📂 Data Description  
-> **Penjelasan tentang struktur data.**  
-
-## 📁 Folder Structure  
+| **Nama Tabel**  | **Deskripsi**  |
+|----------------|---------------|
+| `users`        | Menyimpan data pengguna seperti admin dan karyawan |
+| `customers`    | Menyimpan data pelanggan |
+| `products`     | Menyimpan daftar produk dan stoknya |
+| `transactions` | Menyimpan informasi transaksi penjualan |
+# 📁 Folder Structure  
 > **Struktur folder proyek.**  
 
-## 👥 Our Team  
+# 👥 Our Team  
 > **Kenalan dengan tim pengembang!**  
