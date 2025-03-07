@@ -49,23 +49,25 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 
 ## Berikut adalah beberapa tampilan dari sistem:
 
+
 ### Beranda
-![Beranda](./Beranda.jpg)
+![Beranda](Beranda.jpg)
 
 ### Manajemen Produk
-![Manajemen Produk](./Manajemen-produk.jpg)
+![Manajemen Produk](Manajemen Produk.jpg)
 
 ### Manajemen Stok
-![Manajemen Stok](./manajemen-stok.jpg)
+![Manajemen Stok](Manajemen Stok.jpg)
 
 ### Manajemen Pelanggan
-![Manajemen Pelanggan](./manajemen-pelanggan.jpg)
+![Manajemen Pelanggan](Manajemen Pelanggan.jpg)
 
 ### Transaksi dan Invoice
-![Transaksi dan Invoice](./transaksi-invoice.jpg)
+![Transaksi dan Invoice](Transaksi dan Invoice.jpg)
 
 ### Laporan Statistik
-![Laporan Statistik](./laporan-statistik.jpg)
+![Laporan Statistik](Laporan Statistik.jpg)
+
  
 
 # 🎥 Demo  
