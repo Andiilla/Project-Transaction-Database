@@ -1,7 +1,7 @@
 # 👋 Selamat Datang di Repositori Ini! 🚀  
 
 Halo! Terima kasih sudah mampir ke proyek ini.  
-Di sini, kamu akan menemukan **Project Transaction Database**, istem manajemen transaksi bisnis yang menyediakan fitur pelacakan produk, stok, pelanggan, serta transaksi & invoice. Dashboard dilengkapi dengan laporan dan statistik interaktif untuk menganalisis jumlah transaksi dan pendapatan per kota, memudahkan pengambilan keputusan bisnis secara real-time⏳📉✨  
+Di sini, kamu akan menemukan **Project Transaction Database**, sistem manajemen transaksi bisnis yang menyediakan fitur pelacakan produk, stok, pelanggan, serta transaksi & invoice. Dashboard dilengkapi dengan laporan dan statistik interaktif untuk menganalisis jumlah transaksi dan pendapatan per kota, memudahkan pengambilan keputusan bisnis secara real-time⏳📉✨  
 
 💡 **Apa yang bisa kamu temukan di sini?**  
 ✅ Dokumentasi lengkap  
@@ -29,7 +29,7 @@ Jika ada pertanyaan atau saran, feel free untuk membuka **issue** atau **pull re
 ---
 
 # 📝 Information  
-## Transaction Project 
+## Sistem Manajemen Transaksi
 Proyek ini merupakan implementasi sistem manajemen transaksi berbasis database yang dikembangkan untuk membantu bisnis dalam mencatat, memantau, dan menganalisis data transaksi secara terstruktur. Dengan fitur utama seperti pelacakan stok, manajemen pelanggan, serta laporan statistik interaktif, sistem ini mendukung pengambilan keputusan yang lebih cepat dan akurat.
 
 ## Penggunaan
@@ -46,7 +46,27 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 📚 Proyek ini dibuat sebagai tugas Proyek Praktikum Manajemen Data Statistika tahun 2025, dalam mata kuliah pilihan pascasarjana Statistik dan Sains Data, IPB University.
 
 # 🖼 Screenshot  
-> **Tampilkan beberapa screenshot proyek di sini.**  
+
+## Berikut adalah beberapa tampilan dari sistem:
+
+### Beranda
+![Beranda](./beranda.jpg)
+
+### Manajemen Produk
+![Manajemen Produk](./manajemen-produk.jpg)
+
+### Manajemen Stok
+![Manajemen Stok](./manajemen-stok.jpg)
+
+### Manajemen Pelanggan
+![Manajemen Pelanggan](./manajemen-pelanggan.jpg)
+
+### Transaksi dan Invoice
+![Transaksi dan Invoice](./transaksi-invoice.jpg)
+
+### Laporan Statistik
+![Laporan Statistik](./laporan-statistik.jpg)
+ 
 
 # 🎥 Demo  
 > **Tambahkan link demo jika ada.**  
