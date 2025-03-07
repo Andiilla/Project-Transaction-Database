@@ -78,7 +78,9 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 > **List kebutuhan sistem & dependencies.**  
 
 # 🗄 Database Scheme  
-> **Struktur database yang digunakan.**  
+# Berikut adalah database sceheme pada sistem ini : 
+![Database Scheme](Desain%20DataBase/Kelompok%201_FIX_IR.jpg)
+
 
 # 🏗 Entity Relationship Diagram (ERD)
 ## Berikut adalah ERD dari sistem ini:
