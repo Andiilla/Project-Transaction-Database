@@ -79,8 +79,39 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 
 # 🗄 Database Scheme  
 ## Berikut adalah database sceheme pada sistem ini : 
-(![Desain Database](./Kelompok%201__FIX_IR.jpg)
+![Desain Database](./Kelompok%201__FIX_IR.jpg)
 
+## 🏢 Cabang  
+- **ID_Cabang**: Identitas unik cabang  
+- **ID_Produk**: Produk yang tersedia  
+- **Kota**: Lokasi cabang  
+- **Jumlah_Stock**: Stok produk  
+
+## 🛒 Invoice (Transaksi)  
+- **ID_Invoice**: ID transaksi  
+- **ID_Produk** | **ID_Cabang** | **ID_Pelanggan**  
+- **Total**: Total harga 💰  
+- **Tanggal & Waktu**: Waktu transaksi ⏳  
+- **Pembayaran**: Metode pembayaran 💳  
+- **Penilaian**: Feedback pelanggan ⭐  
+
+## 👤 Pelanggan  
+- **ID_Pelanggan**: ID pelanggan  
+- **Tipe_Pelanggan**: Reguler/Member  
+- **Jenis_Kelamin**: Gender  
+
+## 📦 Produk  
+- **ID_Produk**: ID produk  
+- **Kategori_Produk**: Jenis produk  
+- **Harga_Satuan**: Harga per unit 💵  
+- **Kuantitas**: Jumlah produk  
+- **Total_Harga**: Total harga transaksi  
+- **ID_Cabang**: Cabang produk tersedia  
+
+## 📦 Stock  
+- **ID_Produk** | **ID_Cabang**  
+- **Jumlah_Stock**: Ketersediaan stok 📊  
+- **Tanggal_Update**: Update terakhir 📆  
 
 
 # 🏗 Entity Relationship Diagram (ERD)
