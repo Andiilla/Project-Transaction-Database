@@ -36,10 +36,11 @@ Proyek ini merupakan implementasi sistem manajemen transaksi berbasis database y
 Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi penjualan dengan memilih pelanggan serta produk yang dibeli. Sistem secara otomatis menghitung total pembayaran dan menyimpan transaksi ke dalam database. Pengguna juga dapat mengakses laporan statistik untuk menganalisis penjualan, melihat tren stok, serta mengelola data pelanggan dan pengguna sesuai dengan hak akses yang diberikan
 
 ## Teknologi yang digunakan
-1. Database Manager: MySQL
-2. Design Manager :
-3. Backend: Python Flask / Node.js Express
-4. Frontend: React / Vue.js
+1. DB Manger: MySQL, R-Studio
+2. Backend:  R-Studio
+3. Frontend:  R-Studio
+4. Design : draw io
+
 
 # 📖 About  
 💡 Proyek ini dikembangkan untuk membantu bisnis dalam mengelola transaksi mereka secara lebih efisien dan terdokumentasi dengan baik. Dengan adanya fitur pelacakan stok, manajemen pelanggan, serta laporan statistik, sistem ini diharapkan dapat meningkatkan efisiensi operasional dan memberikan wawasan bisnis yang lebih baik bagi penggunanya. 
@@ -63,7 +64,7 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 ![Manajemen Pelanggan](Manajemen%20Pelanggan.jpg)
 
 ### Transaksi dan Invoice
-![Transaksi dan Invoice](Transaksi%20dan_Invoice.jpg)
+![Transaksi dan Invoice](Transaksi%20dan%20Invoice.jpg)
 
 ### Laporan Statistik
 ![Laporan Statistik](Laporan%20Statistik.jpg)
