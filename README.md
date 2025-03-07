@@ -50,10 +50,10 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 ## Berikut adalah beberapa tampilan dari sistem:
 
 ### Beranda
-![Beranda](./beranda.jpg)
+![Beranda](./Beranda.jpg)
 
 ### Manajemen Produk
-![Manajemen Produk](./manajemen-produk.jpg)
+![Manajemen Produk](./Manajemen-produk.jpg)
 
 ### Manajemen Stok
 ![Manajemen Stok](./manajemen-stok.jpg)
