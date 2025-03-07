@@ -58,8 +58,7 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 > **Struktur database yang digunakan.**  
 
 # 🏗 Entity Relationship Diagram (ERD)
->Berikut adalah ERD untuk sistem ini:
-Berikut adalah ERD dari sistem ini:
+## Berikut adalah ERD dari sistem ini:
 
 ![ERD](./Kelompok%201_FIX_ERD1.jpg)
 
@@ -93,13 +92,12 @@ Berikut adalah ERD dari sistem ini:
 
 # 📂 Data Description  
 ## Berikut adalah tabel-tabel utama dalam database ini:
-
 | **Nama Tabel**  | **Deskripsi**  |
 |----------------|---------------|
-| `users`        | Menyimpan data pengguna seperti admin dan karyawan |
-| `customers`    | Menyimpan data pelanggan |
-| `products`     | Menyimpan daftar produk dan stoknya |
-| `transactions` | Menyimpan informasi transaksi penjualan |
+| `Cabang`       | Menyimpan informasi mengenai cabang usaha |
+| `Invoice`      | Menyimpan data transaksi penjualan |
+| `Pelanggan`    | Menyimpan data pelanggan bisnis |
+| `Produk`       | Menyimpan daftar produk beserta stoknya |
 # 📁 Folder Structure  
 > **Struktur folder proyek.**  
 
