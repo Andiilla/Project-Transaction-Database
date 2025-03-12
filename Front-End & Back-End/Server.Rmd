@@ -1,0 +1,453 @@
+---
+title: "UX"
+author: "Rizka Annisa Mingka
+date: "2025-02-26"
+output: html_document
+runtime: shiny
+---
+
+
+
+```{r}
+library(shiny)
+library(graphics)
+library(shinydashboard)
+library(graphics)
+library(shiny)
+library(DT)
+library(DBI)
+library(RMySQL)
+library(ggplot2)
+
+
+# Koneksi ke database
+con <- dbConnect(
+  RMySQL::MySQL(),
+  dbname = "projecttransactiondatabase",
+  host = "127.0.0.1",
+  user = "root",
+  password = "",
+  port = 3306
+)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Business Transaction Management"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Beranda", tabName = "home", icon = icon("home")),
+      menuItem("Manajemen Produk", tabName = "produk", icon = icon("box")),
+      menuItem("Manajemen Stok", tabName = "stok", icon = icon("warehouse")),
+      menuItem("Manajemen Pelanggan", tabName = "pelanggan", icon = icon("users")),
+      menuItem("Transaksi & Invoice", tabName = "transaksi", icon = icon("file-invoice-dollar")),
+      menuItem("Laporan & Statistik", tabName = "statistik", icon = icon("chart-line")),
+      menuItem("Kategori Produk", tabName = "analisis", icon = icon("chart-bar")),
+      menuItem("Analisis Pola Pembelian", tabName = "analisis_pola_pembelian", icon = icon("shopping-cart")),
+      menuItem("Stok Hampir Habis", tabName = "stok_hampir_habis", icon = icon("exclamation-triangle")),
+      menuItem("Pendapatan Harian", tabName = "pendapatan_harian", icon = icon("chart-line")),
+      menuItem("Tim Kami", tabName = "team", icon = icon("users-cog"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "home", 
+              fluidPage(
+                h2("Selamat Datang di Sistem Manajemen Transaksi"),
+                fluidRow(
+                  valueBoxOutput("total_cabang"),
+                  valueBoxOutput("total_produk"),
+                  valueBoxOutput("total_pelanggan")
+                )
+              )
+      ),
+      tabItem(tabName = "produk", 
+              fluidPage(
+                h2("Manajemen Produk"),
+                DTOutput("table_produk")
+              )
+      ),
+      tabItem(tabName = "stok", 
+              fluidPage(
+                h2("Manajemen Stok"),
+                DTOutput("table_stock")
+              )
+      ),
+      tabItem(tabName = "pelanggan", 
+              fluidPage(
+                h2("Manajemen Pelanggan"),
+                DTOutput("table_pelanggan")
+              )
+      ),
+      tabItem(tabName = "transaksi", 
+              fluidPage(
+                h2("Transaksi & Invoice"),
+                DTOutput("table_invoice")
+              )
+      ),
+      tabItem(tabName = "statistik", 
+              fluidPage(
+                h2("Laporan & Statistik"),
+                p("Berikut adalah Grafik dan Laporan Statistik Business Transaction."),
+                fluidRow(
+                  column(6, plotOutput("transaksi_cabang_plot")),
+                  column(6, plotOutput("harga_kategori_plot"))
+                ),
+                h3("Rekap Jumlah Transaksi & Pendapatan per Cabang"),
+                DTOutput("rekap_transaksi")
+              )
+      ),
+      tabItem(tabName = "analisis",
+        fluidPage(
+          h2("Produk dengan Penjualan Tertinggi"),
+          selectInput("kategori_produk", "Pilih Kategori Produk:", choices = NULL), # Dropdown dinamis
+          plotOutput("penjualan_produk_plot"),
+          DTOutput("penjualan_produk_table")
+        )
+      ),
+      tabItem(tabName = "analisis_pola_pembelian",
+        fluidPage(
+          titlePanel("Analisis Pola Pembelian Pelanggan"),
+          # Tampilkan Tabel
+          box(
+            title = "Tabel Pola Pembelian", 
+            status = "primary", 
+            solidHeader = TRUE, 
+            width = 12,
+            dataTableOutput("pola_pembelian")
+            ),
+          # Tampilkan Visualisasi Grafik Batang
+          box(
+            title = "Grafik Pola Pembelian Pelanggan",
+            status = "info",
+            solidHeader = TRUE,
+            width = 12,
+            plotOutput("grafik_pola_pembelian", height = "400px")
+            )
+        )
+      ),
+      tabItem(tabName = "stok_hampir_habis",
+        fluidPage(
+          titlePanel("Stok Produk Hampir Habis (<50 unit)"),
+          # Tampilkan Tabel
+          box(
+            title = "Tabel Stok Hampir Habis", 
+            status = "danger", 
+            solidHeader = TRUE, 
+            width = 12,
+            dataTableOutput("stok_hampir_habis")
+          )
+        )
+      ),
+      tabItem(tabName = "pendapatan_harian",
+        fluidPage(
+          titlePanel("Laporan Pendapatan Harian"),
+          # Tampilkan Tabel Pendapatan Harian
+          box(
+            title = "Tabel Pendapatan Harian",
+            status = "success",
+            solidHeader = TRUE,
+            width = 12,
+            dataTableOutput("pendapatan_harian")
+          ),
+          # Tampilkan Grafik Tren Pendapatan Harian
+          box(
+            title = "Tren Pendapatan Harian",
+            status = "info",
+            solidHeader = TRUE,
+            width = 12,
+            plotOutput("grafik_pendapatan_harian", height = "400px")
+          )
+        )
+      ),
+      tabItem(tabName = "team", 
+              fluidPage(
+                h2("Tim Kami"),
+                fluidRow(
+                  column(4, 
+                         box( 
+                           title = div("Frontend Developers", class = "box-title"), width = 12, status = "primary", solidHeader = TRUE, 
+                           div(style = "text-align:center;", 
+                               img(src = "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/Andiilla.png", 
+                                   height = "120px", width = "120px", class = "img-circle"),
+                               h4("Andi Illa Erviani Nensi"),
+                               p("M0501241035")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "DB Managers", width = 12, status = "success", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Hazelita Dwi Rahmasari"),
+                               p("M0501241067")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "Design Managers", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://via.placeholder.com/150", height = "120px", width = "120px", class = "img-circle"),
+                               h4("Wildatul Maulidiyah"),
+                               p("M0501241091")
+                           )
+                         )
+                  )
+                ),
+                fluidRow(
+                  column(4, 
+                         box(
+                           title = "Backend Developers", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/Rizka.png", 
+                                   height = "120px", width = "120px", class = "img-circle"),
+                               h4("Rizka Annisa Mingka"),
+                               p("M0501241041")
+                           )
+                         )
+                  ),
+                  column(4, 
+                         box(
+                           title = "Technical Writers", width = 12, status = "info", solidHeader = TRUE,
+                           div(style = "text-align:center;", 
+                               img(src = "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/Meavi.png", 
+                                   height = "120px", width = "120px", class = "img-circle"),
+                               h4("Meavi Cintani"),
+                               p("M0501241040")
+                           )
+                         )
+                  )
+                )
+              )
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  # Ambil Data Manajemen Produk
+  output$table_produk <- renderDT({
+    query <- "SELECT p.ID_Produk, p.Kategori_Produk, p.Harga_Satuan, p.Kuantitas, 
+                     p.Total_Harga, p.ID_Cabang, c.Kota 
+              FROM produk p
+              JOIN cabang c ON p.ID_Cabang = c.ID_Cabang"
+    data_produk <- dbGetQuery(con, query)
+    datatable(data_produk)
+  })
+  
+  output$table_stock <- renderDT({
+    query <- "SELECT ID_Produk, ID_Cabang, Jumlah_Stock, Tanggal_Update FROM stock"
+    data_stock <- dbGetQuery(con, query)
+    datatable(data_stock)
+  })
+  
+  output$table_pelanggan <- renderDT({
+    query <- "SELECT ID_Pelanggan, Tipe_Pelanggan, Jenis_Kelamin FROM pelanggan"
+    data_pelanggan <- dbGetQuery(con, query)
+    datatable(data_pelanggan)
+  })
+  
+  output$table_invoice <- renderDT({
+    query <- "SELECT ID_Invoice, ID_Produk, ID_Cabang, ID_Pelanggan, Total, Tanggal, Waktu, Pembayaran FROM invoice"
+    data_invoice <- dbGetQuery(con, query)
+    datatable(data_invoice)
+  })
+
+  # Value Boxes
+  output$total_cabang <- renderValueBox({
+    query <- "SELECT COUNT(DISTINCT ID_Cabang) AS total FROM cabang"
+    total_cabang <- dbGetQuery(con, query)$total
+    valueBox(total_cabang, "Total Cabang", icon = icon("building"))
+  })
+  
+  output$total_produk <- renderValueBox({
+    query <- "SELECT COUNT(ID_Produk) AS total FROM produk"
+    total_produk <- dbGetQuery(con, query)$total
+    valueBox(total_produk, "Total Produk", icon = icon("box-open"))
+  })
+  
+  output$total_pelanggan <- renderValueBox({
+    query <- "SELECT COUNT(ID_Pelanggan) AS total FROM pelanggan"
+    total_pelanggan <- dbGetQuery(con, query)$total
+    valueBox(total_pelanggan, "Total Pelanggan", icon = icon("user-friends"))
+  })
+  
+  # Statistik Jumlah Transaksi per Kota
+  output$transaksi_cabang_plot <- renderPlot({
+    query <- "SELECT c.Kota, COUNT(i.ID_Invoice) AS Jumlah_Transaksi
+              FROM invoice i
+              JOIN cabang c ON i.ID_Cabang = c.ID_Cabang
+              GROUP BY c.Kota"
+    transaksi_summary <- dbGetQuery(con, query)
+    
+    ggplot(transaksi_summary, aes(x = Kota, y = Jumlah_Transaksi, fill = Kota)) +
+      geom_bar(stat = "identity") +
+      labs(title = "Jumlah Transaksi per Kota", x = "Kota", y = "Jumlah Transaksi") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  })
+
+  # Statistik Pendapatan per Kota
+  output$harga_kategori_plot <- renderPlot({
+    query <- "SELECT c.Kota, SUM(i.Total) AS Total_Pendapatan
+              FROM invoice i
+              JOIN cabang c ON i.ID_Cabang = c.ID_Cabang
+              GROUP BY c.Kota"
+    pendapatan_summary <- dbGetQuery(con, query)
+    
+    ggplot(pendapatan_summary, aes(x = Kota, y = Total_Pendapatan, fill = Kota)) +
+      geom_bar(stat = "identity") +
+      labs(title = "Total Pendapatan per Kota", x = "Kota", y = "Total Pendapatan (Rp)") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  })
+
+  # Tabel Rekap Jumlah Transaksi dan Pendapatan per Kota
+  output$rekap_transaksi <- renderDT({
+    query <- "SELECT c.Kota, COUNT(i.ID_Invoice) AS Jumlah_Transaksi, SUM(i.Total) AS Total_Pendapatan
+              FROM invoice i
+              JOIN cabang c ON i.ID_Cabang = c.ID_Cabang
+              GROUP BY c.Kota"
+    rekap <- dbGetQuery(con, query)
+    
+    datatable(rekap, options = list(pageLength = 10))
+  })
+  
+  # Produk dengan Penjualan Tertinggi
+  output$top_produk <- renderDT({
+    query <- paste0("SELECT p.ID_Produk, p.Harga_Satuan, 
+                        SUM(i.Total) AS Total_Penjualan
+                 FROM invoice i
+                 JOIN produk p ON i.ID_Produk = p.ID_Produk
+                 WHERE p.Kategori_Produk = '", input$kategori_produk, "'
+                 GROUP BY p.ID_Produk, p.Harga_Satuan
+                 ORDER BY Total_Penjualan DESC
+                 LIMIT 10")
+    top_produk <- dbGetQuery(con, query)
+    datatable(top_produk)
+  })
+  
+  # Analisis Pola Pembelian Pelanggan
+  output$pola_pembelian <- renderDT({
+    query <- "SELECT p.Tipe_Pelanggan, COUNT(i.ID_Invoice) AS Jumlah_Transaksi
+              FROM invoice i
+              JOIN pelanggan p ON i.ID_Pelanggan = p.ID_Pelanggan
+              GROUP BY p.Tipe_Pelanggan
+              ORDER BY Jumlah_Transaksi DESC"
+    pola_pembelian <- dbGetQuery(con, query)
+    datatable(pola_pembelian)
+  })
+  
+  # Visualisasi Grafik Pola Pembelian Pelanggan
+  output$grafik_pola_pembelian <- renderPlot({
+    query <- "SELECT p.Tipe_Pelanggan, COUNT(i.ID_Invoice) AS Jumlah_Transaksi
+            FROM invoice i
+            JOIN pelanggan p ON i.ID_Pelanggan = p.ID_Pelanggan
+            GROUP BY p.Tipe_Pelanggan
+            ORDER BY Jumlah_Transaksi DESC"
+  
+  pola_pembelian <- dbGetQuery(con, query)
+  
+  ggplot(pola_pembelian, aes(x = reorder(Tipe_Pelanggan, -Jumlah_Transaksi), y = Jumlah_Transaksi, fill = Tipe_Pelanggan)) +
+    geom_bar(stat = "identity") +
+    theme_minimal() +
+    labs(title = "Distribusi Pola Pembelian Pelanggan",
+         x = "Tipe Pelanggan",
+         y = "Jumlah Transaksi") +
+    theme(legend.position = "none")
+})
+
+  # Stok Produk Hampir Habis (<50 unit)
+  # Render Tabel Stok Hampir Habis
+  output$stok_hampir_habis <- renderDT({
+    query <- "SELECT ID_Produk, ID_Cabang, Jumlah_Stock
+              FROM stock
+              WHERE Jumlah_Stock < 50"
+    stok_habis <- dbGetQuery(con, query)
+    datatable(stok_habis)
+  })
+  
+
+  # Laporan Pendapatan Harian
+  # Render Tabel Pendapatan Harian
+  output$pendapatan_harian <- renderDT({
+    query <- "SELECT DATE(Tanggal) AS Tanggal, SUM(Total) AS Total_Pendapatan
+              FROM invoice
+              GROUP BY DATE(Tanggal)
+              ORDER BY DATE(Tanggal)"
+    pendapatan_harian <- dbGetQuery(con, query)
+    datatable(pendapatan_harian)
+  })
+  
+  # Render Grafik Tren Pendapatan Harian
+  output$grafik_pendapatan_harian <- renderPlot({
+    query <- "SELECT DATE(Tanggal) AS Tanggal, SUM(Total) AS Total_Pendapatan
+              FROM invoice
+              GROUP BY DATE(Tanggal)
+              ORDER BY DATE(Tanggal)"
+    
+    pendapatan_harian <- dbGetQuery(con, query)
+    
+    ggplot(pendapatan_harian, aes(x = as.Date(Tanggal), y = Total_Pendapatan)) +
+  geom_line(color = "blue", size = 1) +
+  geom_point(color = "red", size = 2) +
+  theme_minimal() +
+  labs(title = "Tren Pendapatan Harian",
+       x = NULL,  # Hapus label sumbu X
+       y = "Total Pendapatan") +
+  theme(axis.text.x = element_blank(),  # Sembunyikan teks tanggal
+        axis.ticks.x = element_blank())  # Sembunyikan garis sumbu X
+  })
+  
+  # Ambil daftar kategori produk untuk dropdown
+  observe({
+    query <- "SELECT DISTINCT Kategori_Produk FROM produk"
+    kategori_list <- dbGetQuery(con, query)$Kategori_Produk
+    updateSelectInput(session, "kategori_produk", choices = kategori_list)
+  })
+
+  
+  # Tabel Produk dengan Penjualan Tertinggi Berdasarkan Kategori
+  output$penjualan_produk_table <- renderDT({
+    req(input$kategori_produk)
+    query <- paste0("SELECT p.ID_Produk, p.Kategori_Produk, p.Harga_Satuan, 
+                            SUM(i.Total) AS Total_Penjualan
+                     FROM invoice i
+                     JOIN produk p ON i.ID_Produk = p.ID_Produk
+                     WHERE p.Kategori_Produk = '", input$kategori_produk, "'
+                     GROUP BY p.ID_Produk, p.Kategori_Produk, p.Harga_Satuan
+                     ORDER BY Total_Penjualan DESC
+                     LIMIT 10")
+    
+    data_penjualan <- dbGetQuery(con, query)
+    datatable(data_penjualan)
+  })
+  
+  # Grafik Total Penjualan Berdasarkan Kategori Produk
+  output$penjualan_produk_plot <- renderPlot({
+    req(input$kategori_produk)
+    
+    query <- paste0("SELECT p.ID_Produk, SUM(i.Total) AS Total_Penjualan
+                     FROM invoice i
+                     JOIN produk p ON i.ID_Produk = p.ID_Produk
+                     WHERE p.Kategori_Produk = '", input$kategori_produk, "'
+                     GROUP BY p.ID_Produk
+                     ORDER BY Total_Penjualan DESC
+                     LIMIT 10")
+    
+    data_penjualan <- dbGetQuery(con, query)
+    
+    ggplot(data_penjualan, aes(x = reorder(ID_Produk, Total_Penjualan), y = Total_Penjualan, fill = ID_Produk)) +
+      geom_bar(stat = "identity") +
+      coord_flip() +
+      labs(title = paste("Top Produk dalam Kategori:", input$kategori_produk),
+           x = "ID Produk", y = "Total Penjualan") +
+      theme_minimal()
+  })
+
+}
+
+shinyApp(ui, server)
+
+```
+
