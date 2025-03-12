@@ -10,7 +10,10 @@ runtime: shiny
 
 ```{r}
 library(shiny)
+library(graphics)
 library(shinydashboard)
+library(graphics)
+library(shiny)
 library(DT)
 library(DBI)
 library(RMySQL)  # Jika menggunakan MySQL
@@ -37,6 +40,7 @@ ui <- dashboardPage(
       menuItem("Manajemen Pelanggan", tabName = "pelanggan", icon = icon("users")),
       menuItem("Transaksi & Invoice", tabName = "transaksi", icon = icon("file-invoice-dollar")),
       menuItem("Laporan & Statistik", tabName = "statistik", icon = icon("chart-line")),
+      menuItem("Analisis Data", tabName = "analisis", icon = icon("chart-bar")),
       menuItem("Tim Kami", tabName = "team", icon = icon("users-cog"))
     )
   ),
@@ -88,6 +92,14 @@ ui <- dashboardPage(
                 DTOutput("rekap_transaksi")
               )
       ),
+      tabItem(tabName = "analisis",
+        fluidPage(
+          h2("Produk dengan Penjualan Tertinggi"),
+          selectInput("kategori_produk", "Pilih Kategori Produk:", choices = NULL), # Dropdown dinamis
+          plotOutput("penjualan_produk_plot"),
+          DTOutput("penjualan_produk_table")
+        )
+),
       tabItem(tabName = "team", 
               fluidPage(
                 h2("Tim Kami"),
@@ -242,6 +254,118 @@ server <- function(input, output, session) {
     rekap <- dbGetQuery(con, query)
     
     datatable(rekap, options = list(pageLength = 10))
+  })
+  # Produk dengan Penjualan Tertinggi
+  output$top_produk <- renderDT({
+    query <- paste0("SELECT p.ID_Produk, p.Harga_Satuan, 
+                        SUM(i.Total) AS Total_Penjualan
+                 FROM invoice i
+                 JOIN produk p ON i.ID_Produk = p.ID_Produk
+                 WHERE p.Kategori_Produk = '", input$kategori_produk, "'
+                 GROUP BY p.ID_Produk, p.Harga_Satuan
+                 ORDER BY Total_Penjualan DESC
+                 LIMIT 10")
+    top_produk <- dbGetQuery(con, query)
+    datatable(top_produk)
+  })
+  
+  # Analisis Pola Pembelian Pelanggan
+  output$pola_pembelian <- renderDT({
+    query <- "SELECT p.Tipe_Pelanggan, COUNT(i.ID_Invoice) AS Jumlah_Transaksi
+              FROM invoice i
+              JOIN pelanggan p ON i.ID_Pelanggan = p.ID_Pelanggan
+              GROUP BY p.Tipe_Pelanggan
+              ORDER BY Jumlah_Transaksi DESC"
+    pola_pembelian <- dbGetQuery(con, query)
+    datatable(pola_pembelian)
+  })
+
+  # Stok Produk Hampir Habis (<10 unit)
+  output$stok_hampir_habis <- renderDT({
+    query <- "SELECT ID_Produk, ID_Cabang, Jumlah_Stock
+              FROM stock
+              WHERE Jumlah_Stock < 10"
+    stok_habis <- dbGetQuery(con, query)
+    datatable(stok_habis)
+  })
+
+  # Rata-rata Penilaian per Cabang
+  output$rating_cabang <- renderDT({
+    query <- "SELECT c.Kota, AVG(i.Penilaian) AS Rata_Rata_Penilaian
+              FROM invoice i
+              JOIN cabang c ON i.ID_Cabang = c.ID_Cabang
+              WHERE i.Penilaian IS NOT NULL
+              GROUP BY c.Kota"
+    rating_cabang <- dbGetQuery(con, query)
+    datatable(rating_cabang)
+  })
+
+  # Analisis Tren Waktu Transaksi
+  output$tren_transaksi <- renderPlot({
+    query <- "SELECT DATE(Tanggal) AS Tanggal, COUNT(ID_Invoice) AS Jumlah_Transaksi
+              FROM invoice
+              GROUP BY DATE(Tanggal)
+              ORDER BY DATE(Tanggal)"
+    tren_transaksi <- dbGetQuery(con, query)
+
+    ggplot(tren_transaksi, aes(x = Tanggal, y = Jumlah_Transaksi)) +
+      geom_line(color = "blue") +
+      labs(title = "Tren Waktu Transaksi", x = "Tanggal", y = "Jumlah Transaksi") +
+      theme_minimal()
+  })
+
+  # Laporan Pendapatan Harian
+  output$pendapatan_harian <- renderDT({
+    query <- "SELECT DATE(Tanggal) AS Tanggal, SUM(Total) AS Total_Pendapatan
+              FROM invoice
+              GROUP BY DATE(Tanggal)
+              ORDER BY DATE(Tanggal)"
+    pendapatan_harian <- dbGetQuery(con, query)
+    datatable(pendapatan_harian)
+  })
+  # Ambil daftar kategori produk untuk dropdown
+  observe({
+    query <- "SELECT DISTINCT Kategori_Produk FROM produk"
+    kategori_list <- dbGetQuery(con, query)$Kategori_Produk
+    updateSelectInput(session, "kategori_produk", choices = kategori_list)
+  })
+
+  # Tabel produk dengan penjualan tertinggi berdasarkan kategori
+  output$penjualan_produk_table <- renderDT({
+    req(input$kategori_produk)
+    query <- paste0("SELECT p.ID_Produk, p.Kategori_Produk, p.Harga_Satuan, 
+                            SUM(i.Total) AS Total_Penjualan
+                     FROM invoice i
+                     JOIN produk p ON i.ID_Produk = p.ID_Produk
+                     WHERE p.Kategori_Produk = '", input$kategori_produk, "'
+                     GROUP BY p.ID_Produk, p.Kategori_Produk, p.Harga_Satuan
+                     ORDER BY Total_Penjualan DESC
+                     LIMIT 10")
+    
+    data_penjualan <- dbGetQuery(con, query)
+    datatable(data_penjualan)
+  })
+  
+  # Grafik total penjualan berdasarkan kategori produk
+  output$penjualan_produk_plot <- renderPlot({
+    req(input$kategori_produk)
+    
+    query <- paste0("SELECT p.ID_Produk, SUM(i.Total) AS Total_Penjualan
+                     FROM invoice i
+                     JOIN produk p ON i.ID_Produk = p.ID_Produk
+                     WHERE p.Kategori_Produk = '", input$kategori_produk, "'
+                     GROUP BY p.ID_Produk
+                     ORDER BY Total_Penjualan DESC
+                     LIMIT 10")
+    
+    data_penjualan <- dbGetQuery(con, query)
+    
+    ggplot(data_penjualan, aes(x = reorder(ID_Produk, Total_Penjualan), y = Total_Penjualan, fill = ID_Produk)) +
+      geom_bar(stat = "identity") +
+      coord_flip() +
+      labs(title = paste("Top Produk dalam Kategori:", input$kategori_produk),
+           x = "ID Produk", y = "Total Penjualan") +
+      theme_minimal()
   })
 
 }
