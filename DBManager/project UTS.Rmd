@@ -9,6 +9,8 @@ output: html_document
 library(DBI)
 <<<<<<< Updated upstream
 library(RMySQL)
+library(stats)
+library(base)
 library(dplyr)
 library(readr)
 =======
@@ -321,23 +323,35 @@ con_db <- dbConnect(
 ```{r}
 #7. Baca Data dari CSV
 #data cabang
-cabang <- read.csv("D://zkuliah2//SMT 2//Manajemen Data Statistika//Project-Transaction-Database//Data//data_cabang.csv", stringsAsFactors = FALSE)
+cabang <- read.csv("D://IPB//semester 2//Manajemen Data Statistika//Praktikum MDS//Project-Transaction-Database//Data//data_cabang.csv", stringsAsFactors = FALSE)
 head(cabang)  # Cek apakah data terbaca dengan benar
 
+<<<<<<< Updated upstream:DBManager/project UTS.Rmd
 #data invoice
 invoice <- read.csv("D://zkuliah2//SMT 2//Manajemen Data Statistika//Project-Transaction-Database//Data//data_invoice.csv", stringsAsFactors = FALSE)
 head(invoice)  # Cek apakah data terbaca dengan benar
+=======
+#data produk
+produk<- read.csv("D://IPB//semester 2//Manajemen Data Statistika//Praktikum MDS//Project-Transaction-Database//Data//data_produk.csv", stringsAsFactors = FALSE)
+head(produk)
+>>>>>>> Stashed changes:DBManager/UTS_PROJECT_MDS.Rmd
 
 #data pelanggan
-pelanggan <- read.csv("D://zkuliah2//SMT 2//Manajemen Data Statistika//Project-Transaction-Database//Data//data_pelanggan.csv", stringsAsFactors = FALSE)
+pelanggan <- read.csv("D://IPB//semester 2//Manajemen Data Statistika//Praktikum MDS//Project-Transaction-Database//Data//data_pelanggan.csv", stringsAsFactors = FALSE)
 head(pelanggan)  # Cek apakah data terbaca dengan benar
 
+<<<<<<< Updated upstream:DBManager/project UTS.Rmd
 #data produk
 produk<- read.csv("D://zkuliah2//SMT 2//Manajemen Data Statistika//Project-Transaction-Database//Data//data_produk.csv", stringsAsFactors = FALSE)
 head(produk)
+=======
+#data invoice
+invoice <- read.csv("D://IPB//semester 2//Manajemen Data Statistika//Praktikum MDS//Project-Transaction-Database//Data//data_invoice.csv", stringsAsFactors = FALSE)
+head(invoice)  # Cek apakah data terbaca dengan benar
+>>>>>>> Stashed changes:DBManager/UTS_PROJECT_MDS.Rmd
 
 #data stock
-stock <- read.csv("D://zkuliah2//SMT 2//Manajemen Data Statistika//Project-Transaction-Database//Data//data_stock.csv", stringsAsFactors = FALSE)
+stock <- read.csv("D://IPB//semester 2//Manajemen Data Statistika//Praktikum MDS//Project-Transaction-Database//Data//data_stock.csv", stringsAsFactors = FALSE)
 head(stock)  # Cek apakah data terbaca dengan benar
 ```
 
