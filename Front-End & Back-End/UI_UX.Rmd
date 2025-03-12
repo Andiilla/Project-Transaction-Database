@@ -53,9 +53,17 @@ ui <- dashboardPage(
                   valueBoxOutput("total_cabang"),
                   valueBoxOutput("total_produk"),
                   valueBoxOutput("total_pelanggan")
-                )
-              )
-      ),
+                ),
+                fluidRow(
+                  column(6, 
+                    h3("Kategori Produk"),
+                    slickROutput("carousel", width = "100%")
+                  ),
+                  column(6, 
+                    h3("Peta Kota Penjualan"),
+                    leafletOutput("peta_penjualan", height = "400px")
+                  )
+      ))),
       tabItem(tabName = "produk", 
               fluidPage(
                 h2("Manajemen Produk"),
@@ -167,6 +175,63 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output, session) {
+  output$total_cabang <- renderValueBox({ valueBox(1000, "Total Cabang", icon = icon("building"), color = "aqua") })
+  output$total_produk <- renderValueBox({ valueBox(1000, "Total Produk", icon = icon("box"), color = "aqua") })
+  output$total_pelanggan <- renderValueBox({ valueBox(1000, "Total Pelanggan", icon = icon("users"), color = "aqua") })
+  
+  # Carousel dengan 7 kategori produk
+  img_urls <- c(
+  "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/Fashion accessories.jpg",
+  "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/Home and lyfestyle.jpg",
+  "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/ellectronic accessories.jpg",
+  "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/food and bevarage.jpg",
+  "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/health and beuty.jpg",
+  "https://raw.githubusercontent.com/Andiilla/Project-Transaction-Database/main/Front-End & Back-End/sportandproduct.jpeg"
+)
+  
+  # Nama kategori
+  category_names <- c(
+    "Fashion Accessories",
+    "Electronic Accessories",
+    "Food and Beverage",
+    "Health and Beauty",
+    "Home and Lifestyle",
+    "Sports and Products"
+    )
+  
+  output$carousel <- renderSlickR({
+    slickR(
+      lapply(1:length(img_urls), function(i) {
+        div(
+          img(src = img_urls[i], width = "200px", height = "150px", style = "display:block; margin:auto;"),
+          div(category_names[i], style = "text-align:center; font-weight:bold; margin-top:10px; font-size:16px;")
+        )
+      })
+    )
+  })
+  
+  
+  # Peta Kota Penjualan
+  kota <- data.frame(
+    nama = c("Yangon", "Mandalay", "Naypyitaw"),
+    lat = c(16.8661, 21.9750, 19.7633),
+    lon = c(96.1951, 96.0836, 96.0785)
+  )
+  
+  output$peta_penjualan <- renderLeaflet({
+    leaflet(kota) %>%
+      addTiles() %>%
+      addAwesomeMarkers(~lon, ~lat, 
+                        icon = awesomeIcons(
+                          icon = "map-marker-alt", 
+                          library = "fa",
+                          markerColor = "red"
+                        ),
+                        label = ~nama, 
+                        labelOptions = labelOptions(direction = "top", offset = c(0, -10)))
+  })
+  
+  
   # Ambil data dari database untuk Manajemen Produk
   output$table_produk <- renderDT({
     query <- "SELECT p.ID_Produk, p.Kategori_Produk, p.Harga_Satuan, p.Kuantitas, 
