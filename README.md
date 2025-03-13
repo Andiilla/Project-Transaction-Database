@@ -47,11 +47,12 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 
 
 # 📖 About  
+
 💡 Proyek ini dikembangkan untuk membantu bisnis dalam mengelola transaksi mereka secara lebih efisien dan terdokumentasi dengan baik. Dengan adanya fitur pelacakan stok, manajemen pelanggan, serta laporan statistik, sistem ini diharapkan dapat meningkatkan efisiensi operasional dan memberikan wawasan bisnis yang lebih baik bagi penggunanya. 
 📚 Proyek ini dibuat sebagai tugas Proyek Praktikum Manajemen Data Statistika tahun 2025, dalam mata kuliah pilihan pascasarjana Statistik dan Sains Data, IPB University.
 
 # 🖼 Screenshot  
-
+![Logo](logo.png)
 ## Berikut adalah beberapa tampilan dari sistem:
 
 
