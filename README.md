@@ -1,4 +1,7 @@
-# 🌷 Selamat Datang di Quinta Bloom & CO! 💕✨
+<p align="center">
+  <strong>🌷 Selamat Datang di Quinta Bloom & CO! 💕✨</strong>
+</p>
+
 ![Opening](opening.png)
 
 Halo! Terima kasih sudah mampir ke proyek ini.  
