@@ -84,6 +84,7 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 
 # 🗄 Database Scheme  
 ## Berikut adalah database sceheme pada sistem ini : 
+
 ![IR Diagram](Technical%20Writer/Kelompok%201_FIX_IR.jpg)
 
 ## 🏢 Cabang  
