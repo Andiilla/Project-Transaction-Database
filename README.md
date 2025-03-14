@@ -160,6 +160,145 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 | `Invoice`      | Menyimpan data transaksi penjualan |
 | `Pelanggan`    | Menyimpan data pelanggan bisnis |
 | `Produk`       | Menyimpan daftar produk beserta stoknya |
+
+# Project Transaction Database
+
+## Deskripsi Proyek
+Project Transaction Database adalah sistem manajemen transaksi bisnis yang menyimpan data terkait produk, pelanggan, invoice, dan stok barang di berbagai cabang.
+
+---
+
+## 1. Tabel `cabang`
+### Deskripsi
+Tabel `cabang` menyimpan informasi mengenai cabang yang menjual produk tertentu, termasuk lokasi dan jumlah stok.
+
+### Struktur Tabel
+| Nama Kolom   | Tipe Data | Deskripsi |
+|-------------|----------|-----------|
+| ID_Cabang   | String   | ID unik untuk cabang |
+| ID_Produk   | String   | ID produk yang tersedia di cabang |
+| Kota        | String   | Lokasi cabang |
+| Jumlah_Stock | Integer  | Jumlah stok produk di cabang |
+
+### Syntax Insert Data
+```r
+for (i in 1:nrow(cabang)) {
+  query <- sprintf("INSERT INTO cabang (ID_Cabang, ID_Produk, Kota, Jumlah_Stock) VALUES ('%s', '%s', '%s', '%s')",
+    cabang$ID_Cabang[i], cabang$ID_Produk[i], cabang$Kota[i], cabang$Jumlah_Stock[i])
+  dbExecute(con_db, query)
+}
+```
+
+---
+
+## 2. Tabel `produk`
+### Deskripsi
+Tabel `produk` berisi daftar produk yang tersedia, termasuk kategori, harga, dan total nilai transaksi per produk.
+
+### Struktur Tabel
+| Nama Kolom      | Tipe Data | Deskripsi |
+|----------------|----------|-----------|
+| ID_Produk      | String   | ID unik produk |
+| Kategori_Produk | String  | Kategori produk |
+| Harga_Satuan   | Float    | Harga satuan produk |
+| Kuantitas      | Integer  | Jumlah produk yang terjual |
+| Total_Harga    | Float    | Total nilai transaksi produk |
+| ID_Cabang      | String   | ID cabang tempat produk dijual |
+
+### Syntax Insert Data
+```r
+for (i in 1:nrow(produk)) {
+  query <- sprintf("INSERT INTO produk (ID_Produk, Kategori_Produk, Harga_Satuan, Kuantitas, Total_Harga, ID_Cabang) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
+    produk$ID_Produk[i], produk$Kategori_Produk[i], produk$Harga_Satuan[i], produk$Kuantitas[i], produk$Total_Harga[i], produk$ID_Cabang[i])
+  dbExecute(con_db, query)
+}
+```
+
+---
+
+## 3. Tabel `pelanggan`
+### Deskripsi
+Tabel `pelanggan` berisi informasi tentang pelanggan yang melakukan transaksi, termasuk tipe pelanggan dan jenis kelamin.
+
+### Struktur Tabel
+| Nama Kolom      | Tipe Data | Deskripsi |
+|----------------|----------|-----------|
+| ID_Pelanggan   | String   | ID unik pelanggan |
+| Tipe_Pelanggan | String   | Jenis pelanggan (Individu/Bisnis) |
+| Jenis_Kelamin  | String   | Jenis kelamin pelanggan |
+
+### Syntax Insert Data
+```r
+for (i in 1:nrow(pelanggan)) {
+  query <- sprintf("INSERT INTO pelanggan (ID_Pelanggan, Tipe_Pelanggan, Jenis_Kelamin) VALUES ('%s', '%s', '%s')",
+    pelanggan$ID_Pelanggan[i], pelanggan$Tipe_Pelanggan[i], pelanggan$Jenis_Kelamin[i])
+  dbExecute(con_db, query)
+}
+```
+
+---
+
+## 4. Tabel `invoice`
+### Deskripsi
+Tabel `invoice` menyimpan informasi transaksi yang dilakukan oleh pelanggan, termasuk produk yang dibeli, jumlah pembayaran, dan penilaian transaksi.
+
+### Struktur Tabel
+| Nama Kolom    | Tipe Data | Deskripsi |
+|--------------|----------|-----------|
+| ID_Invoice   | String   | ID unik invoice |
+| ID_Produk    | String   | ID produk yang dibeli |
+| ID_Cabang    | String   | ID cabang tempat transaksi terjadi |
+| ID_Pelanggan | String   | ID pelanggan yang melakukan transaksi |
+| Total        | Float    | Total nilai transaksi |
+| Tanggal      | Date     | Tanggal transaksi |
+| Waktu        | Time     | Waktu transaksi |
+| Pembayaran   | String   | Metode pembayaran |
+| Penilaian    | Integer  | Penilaian pelanggan terhadap transaksi |
+
+### Syntax Insert Data
+```r
+for (i in 1:nrow(invoice)) {
+  query <- sprintf("INSERT INTO invoice (ID_Invoice, ID_Produk, ID_Cabang, ID_Pelanggan, Total, Tanggal, Waktu, Pembayaran, Penilaian) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+    invoice$ID_Invoice[i], invoice$ID_Produk[i], invoice$ID_Cabang[i], invoice$ID_Pelanggan[i], invoice$Total[i], invoice$Tanggal[i], invoice$Waktu[i], invoice$Pembayaran[i], invoice$Penilaian[i])
+  dbExecute(con_db, query)
+}
+```
+
+---
+
+## 5. Tabel `stock`
+### Deskripsi
+Tabel `stock` berisi informasi jumlah stok produk dan tanggal pembaruan stok.
+
+### Struktur Tabel
+| Nama Kolom      | Tipe Data | Deskripsi |
+|----------------|----------|-----------|
+| ID_Produk      | String   | ID unik produk |
+| ID_Cabang      | String   | ID cabang tempat stok berada |
+| Jumlah_Stock   | Integer  | Jumlah stok produk |
+| Tanggal_Update | Date     | Tanggal terakhir stok diperbarui |
+
+### Syntax Insert Data
+```r
+for (i in 1:nrow(stock)) {
+  query <- sprintf("INSERT INTO stock (ID_Produk, ID_Cabang, Jumlah_Stock, Tanggal_Update) VALUES ('%s', '%s', '%s', '%s')",
+    stock$ID_Produk[i], stock$ID_Cabang[i], stock$Jumlah_Stock[i], stock$Tanggal_Update[i])
+  dbExecute(con_db, query)
+}
+```
+
+---
+
+## Cara Menggunakan
+1. Pastikan Anda memiliki koneksi database yang telah dikonfigurasi dengan variabel `con_db`.
+2. Pastikan data yang akan dimasukkan telah disiapkan dalam format dataframe sesuai tabel di atas.
+3. Jalankan skrip di atas menggunakan R untuk memasukkan data ke dalam database.
+
+---
+
+
+
+
 # 📁 Folder Structure  
 > **Struktur folder proyek.**  
 
