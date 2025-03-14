@@ -57,10 +57,10 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 
 
 ### Beranda
-![Beranda](Beranda.jpg)
+![Beranda](Technical%20Writer/Beranda.jpg)
 
 ### Manajemen Produk
-![Manajemen Produk](Manajemen%20Produk.jpg)
+![Manajemen Produk](Technical%20Writer/Manajemen%20Produk.jpg)
 
 ### Manajemen Stok
 ![Manajemen Stok](Manajemen%20Stok.jpg)
