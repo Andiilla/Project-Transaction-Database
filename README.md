@@ -76,11 +76,11 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 
  
 
-# 🎥 Demo  ## Link Video  
+# 🎥 Demo   
 
 Klik tautan di bawah untuk melihat video terkait proyek ini:  
 
-[🎥 Lihat Video](https://drive.google.com/file/d/1IvRxLljFwm84VwQGiyFwV-cI6pugTREh/view?usp=sharing)
+[Lihat Video](https://drive.google.com/file/d/1IvRxLljFwm84VwQGiyFwV-cI6pugTREh/view?usp=sharing)
 
 
 # 🗄 Database Scheme  
