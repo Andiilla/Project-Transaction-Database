@@ -2,7 +2,7 @@
   <strong>🌷 Selamat Datang di Quinta Bloom & CO! 💕✨</strong>
 </p>
 
-![Opening](opening.png)
+![Opening](Technical%20Writer/opening.png)
 
 Halo! Terima kasih sudah mampir ke proyek ini.  
 Di sini, kamu akan menemukan **Project Transaction Database**, sistem manajemen transaksi bisnis yang menyediakan fitur pelacakan produk, stok, pelanggan, serta transaksi & invoice. Dashboard dilengkapi dengan laporan dan statistik interaktif untuk menganalisis jumlah transaksi dan pendapatan per kota, memudahkan pengambilan keputusan bisnis secara real-time⏳📉✨  
