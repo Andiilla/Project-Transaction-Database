@@ -153,6 +153,11 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 
 
 # 📂 Data Description  
+
+## Deskripsi Proyek
+Project Transaction Database adalah sistem manajemen transaksi bisnis yang menyimpan data terkait produk, pelanggan, invoice, dan stok barang di berbagai cabang.
+
+---
 ## Berikut adalah tabel-tabel utama dalam database ini:
 | **Nama Tabel**  | **Deskripsi**  |
 |----------------|---------------|
@@ -161,12 +166,7 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 | `Pelanggan`    | Menyimpan data pelanggan bisnis |
 | `Produk`       | Menyimpan daftar produk beserta stoknya |
 
-# Project Transaction Database
 
-## Deskripsi Proyek
-Project Transaction Database adalah sistem manajemen transaksi bisnis yang menyimpan data terkait produk, pelanggan, invoice, dan stok barang di berbagai cabang.
-
----
 
 ## 1. Tabel `cabang`
 ### Deskripsi
