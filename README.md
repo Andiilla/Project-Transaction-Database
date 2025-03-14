@@ -302,7 +302,6 @@ for (i in 1:nrow(stock)) {
 # 📁 Folder Structure  
 > **Struktur folder proyek.**  
 
-# 👥 Our Team  
 # 🌸💻 Tim Pengembang Sistem 🌸💻
 
 Hai semuanya! ✨ Kami adalah tim keren yang mengembangkan sistem ini! 🌈💖  
