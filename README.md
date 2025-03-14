@@ -303,4 +303,35 @@ for (i in 1:nrow(stock)) {
 > **Struktur folder proyek.**  
 
 # 👥 Our Team  
-> **Kenalan dengan tim pengembang!**  
+# 🌸💻 Tim Pengembang Sistem 🌸💻
+
+Hai semuanya! ✨ Kami adalah tim keren yang mengembangkan sistem ini! 🌈💖  
+Kenalan dulu yuk sama anggota tim super kece ini! 🎀👩‍💻
+
+## 👩‍💻💖 **Tim Hebat Kami** 💖👩‍💻
+
+🎀 **Database Manager**  
+📌 [Hazelita Dwi Rahmasari](https://github.com/hazelitadwirahmasari) (M0501241067)  
+💾 Si jago database yang bikin semuanya terstruktur dan rapi! 💡✨  
+
+🎀 **Frontend Developer**  
+📌 [Andi Illa Erviani Nens](https://github.com/...) (M0501241035)  
+🎨 Spesialis bikin tampilan yang super kece dan estetik! 🎀💻  
+
+🎀 **Backend Developer**  
+📌 [Rizka Annisa Mingka](https://github.com/rizkaamingka) (M0501241041)  
+🛠️ Jagoan di balik layar yang bikin sistem ini berjalan dengan lancar! ⚡🖥️  
+
+🎀 **Technical Writer**  
+📌 [Meavi Cintani](https://github.com/meavi2501cintani) (M0501241040)  
+📖 Penulis dokumentasi yang bikin semuanya mudah dimengerti! 💡📚  
+
+🎀 **Database Designer**  
+📌 [Wildatul Maulidiyah](https://github.com/WildatulMaulidiyah) (M0501241091)  
+🔎 Perancang database yang bikin struktur data jadi super efisien! 📊✨  
+
+---
+
+💖 **Terima kasih sudah mampir ke proyek kami!** 💖  
+✨ Jangan lupa kasih ⭐ di repo ini ya! ✨  
+
