@@ -85,7 +85,7 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 # 🗄 Database Scheme  
 ## Berikut adalah database sceheme pada sistem ini : 
 
-![IR Diagram](Technical%20Writer/Kelompok%201_FIX_IR.jpg)
+![IR Diagram](https://github.com/Andiilla/Project-Transaction-Database/blob/498e84bbdacf4dfd7396779c136ab3f2fcd3b8df/Technical%20Writer/Kelompok%201__FIX_IR.jpg)
 
 ## 🏢 Cabang  
 - **ID_Cabang**: Identitas unik cabang  
