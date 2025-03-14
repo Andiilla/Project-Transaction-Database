@@ -299,21 +299,7 @@ for (i in 1:nrow(stock)) {
 
 
 
-# 📁 Folder Structure  
-## :open_file_folder: Struktur Folder 
 
-```         
-.
-├── Source       
-│
-├── App 
-│   
-├── Data
-│   
-├── Images     
-| 
-└── README.md
-```
 # 🌸💻 Tim Pengembang Sistem 🌸💻
 
 Hai semuanya! ✨ Kami adalah tim keren yang mengembangkan sistem ini! 🌈💖  
