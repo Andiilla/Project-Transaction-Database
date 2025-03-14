@@ -72,7 +72,7 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 ![Transaksi dan Invoice](Technical%20Writer/Transaksi%20Invoice.jpg)
 
 ### Laporan Statistik
-![Laporan Statistik](Technical%2Writer/Laporan%2Statistik.jpg)
+![Laporan Statistik](Technical%20Writer/Laporan%20Statistik.jpg)
 
  
 
