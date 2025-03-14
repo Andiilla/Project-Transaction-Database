@@ -84,7 +84,7 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 
 # 🗄 Database Scheme  
 ## Berikut adalah database sceheme pada sistem ini : 
-![Desain Database](./Kelompok%201__FIX_IR.jpg)
+![IR Diagram](Technical%20Writer/Kelompok%201_FIX_IR.jpg)
 
 ## 🏢 Cabang  
 - **ID_Cabang**: Identitas unik cabang  
@@ -122,7 +122,7 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 # 🏗 Entity Relationship Diagram (ERD)
 ## Berikut adalah ERD dari sistem ini:
 
-![ERD](./Kelompok%201_FIX_ERD1.jpg)
+![ERD 1](Technical%20Writer/Kelompok%201_FIX_ERD1.jpg)
 
 📌 **Penjelasan Tabel dan Relasi**
 
@@ -151,6 +151,7 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 - **Cabang** memiliki banyak produk dan stok, sehingga `ID_Cabang` menjadi Foreign Key di **Produk**, **Stock**, dan **Invoice**.
 - **Pelanggan** bisa melakukan banyak transaksi, sehingga `ID_Pelanggan` menjadi Foreign Key di **Invoice**.
 
+![ERD 2](Technical%20Writer/Kelompok%201_FIX_ERD2.jpg)
 
 # 📂 Data Description  
 
