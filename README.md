@@ -79,8 +79,6 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 # 🎥 Demo  
 > **Tambahkan link demo jika ada.**  
 
-# ⚙️ Requirements  
-> **List kebutuhan sistem & dependencies.**  
 
 # 🗄 Database Scheme  
 ## Berikut adalah database sceheme pada sistem ini : 
