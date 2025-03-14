@@ -76,8 +76,11 @@ Pengguna dapat menambahkan data produk, mengelola stok, dan mencatat transaksi p
 
  
 
-# 🎥 Demo  
-📹 [Lihat Video di Google Drive] (https://drive.google.com/file/d/1e1O5lBVZS3Hd21b73FoCnyNzERF57iUu/view?usp=sharing)
+# 🎥 Demo  ## Link Video  
+
+Klik tautan di bawah untuk melihat video terkait proyek ini:  
+
+[🎥 Lihat Video](https://drive.google.com/file/d/1IvRxLljFwm84VwQGiyFwV-cI6pugTREh/view?usp=sharing)
 
 
 # 🗄 Database Scheme  
